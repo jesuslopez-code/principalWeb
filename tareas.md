@@ -16,28 +16,32 @@ para que Jesús pruebe y valide antes de seguir. Estados de tarea: `[ ]` pendien
 - **Criterios de aceptación:** `npm run build` y `npm run dev` arrancan sin errores; no queda
   ninguna referencia a `firebase` ni a `/web1` o `/web2` en `src/`; `README.md` describe el proyecto
   real y no la plantilla de Firebase Studio.
-- **Dependencias:** ninguna. **Estado:** pendiente.
+- **Dependencias:** ninguna. **Estado:** en curso — bloqueada por la pregunta abierta.
 - **Notas / riesgos:** el working tree tiene la limpieza sin commitear. Los agentes **no borran
   ficheros**: si algo sobra, lo señalan y lo borra Jesús.
 
 Tareas:
-- [ ] Quitar el import y el uso de `FirebaseClientProvider` en `src/app/layout.tsx`, dejando
-      `{children}` y `<Toaster />` directamente en el `<body>` — `pweb-frontend-dev`.
-- [ ] Retirar la dependencia `firebase` de `package.json` y comprobar que nada más en `src/` la
-      referencia — `pweb-frontend-dev`.
+- [x] Quitar el import y el uso de `FirebaseClientProvider` en `src/app/layout.tsx`, dejando
+      `{children}` y `<Toaster />` directamente en el `<body>`.
+- [x] Retirar la dependencia `firebase` de `package.json` y comprobar que nada más en `src/` la
+      referencia.
+- [x] Restaurar `src/components/ui/label.tsx`, borrado por error y necesario para `form.tsx`
+      (FIX-003).
+- [x] Arreglar el script `build` de `package.json`, que no funcionaba en Windows (FIX-004).
 - [ ] Quitar las dos tarjetas de proyecto que apuntan a `/web1` y `/web2` de la constante `projects`
-      en `src/app/page.tsx` — `pweb-frontend-dev`.
+      en `src/app/page.tsx` — **bloqueada por la pregunta abierta de abajo**.
 - [ ] **PREGUNTA ABIERTA para Jesús:** decidir qué queda en la sección Projects una vez retiradas
       esas dos tarjetas. Opciones a plantear: ocultar la sección entera hasta tener casos de estudio
       reales (Fase 5), dejarla con un texto de "próximamente", o sustituirla por enlaces a
       repositorios de GitHub. **No decidirlo por cuenta propia**; el resultado condiciona la Fase 5.
 - [ ] Limpiar de `src/lib/placeholder-images.json` las entradas que queden sin uso tras lo anterior
       (`project-1`, `project-2` según lo decidido, y `project-3`, cuya imagen `public/dashboard.png`
-      ya no existe) — `pweb-frontend-dev`.
-- [ ] Revisar las imágenes huérfanas de `public/images/` y reportarlas a Jesús para que decida
-      cuáles borrar — `pweb-frontend-dev`.
-- [ ] Reescribir `README.md` con el proyecto real: qué es, stack, cómo levantarlo (`npm run dev` en
-      el puerto 9002) y cómo se despliega — `pweb-docs`.
+      ya no existe) — **bloqueada por la pregunta abierta**: las tres entradas dependen de qué pase
+      con la sección.
+- [x] Revisar las imágenes huérfanas de `public/images/` y reportarlas a Jesús. Resultado: la única
+      sin usar es `2025-10-07 175434.png`. Pendiente de que Jesús decida si se borra.
+- [x] Reescribir `README.md` con el proyecto real: qué es, stack, cómo levantarlo (`npm run dev` en
+      el puerto 9002) y cómo se despliega.
 - [ ] Revisión con `pweb-reviewer` y cierre de la fase (parar y validar).
 
 ## Fase 2 — Red de seguridad
