@@ -86,6 +86,24 @@ El trabajo se dirige desde ficheros de la **raíz** del repo:
   **`/modulo <nombre>`**.
 - **`fixes.md`** — log de correcciones encontradas al probar.
 
+## Grafo de conocimiento — graphify
+
+Este proyecto usa **graphify**: un grafo de conocimiento del codebase persistente en `graphify-out/`.
+Sirve para responder "¿cómo funciona X?", "¿qué usa Y?", "¿por dónde pasa Z?" **gastando menos
+tokens** que grep más la lectura de muchos ficheros.
+
+- **Antes de una búsqueda amplia** (ubicar código, entender la arquitectura o las relaciones entre
+  partes), **consulta el grafo primero:** `graphify query "<pregunta>"` (contexto amplio),
+  `graphify path "A" "B"` (relación entre dos conceptos), `graphify explain "X"` (explica un nodo).
+- **El grafo orienta; el código manda:** lo que vayas a modificar, verifícalo en el fichero real.
+- **Generar/actualizar:** si no existe `graphify-out/`, créalo una vez con `/graphify`. Cuando el
+  código cambie bastante, refréscalo con `/graphify --update` (incremental).
+- `graphify-out/` está **ignorado en git** por ser salida regenerable.
+
+Aviso de proporción: `src/` son unos 20 ficheros y cabe entero en contexto. Para un cambio puntual
+en un fichero que ya sabes cuál es, ir directo al fichero sigue siendo lo más barato; el grafo gana
+cuando no sabes dónde vive algo o cómo se conecta.
+
 ## Particularidades por apartado/módulo
 
 Este `CLAUDE.md` y los agentes contienen solo directrices que afectan a **todo el proyecto**. Cada

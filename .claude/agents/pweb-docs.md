@@ -79,6 +79,17 @@ Si una información encaja en dos sitios, escríbela en uno y **enlaza** desde e
 - Convenciones de documentación no escritas; dónde vive la fuente de verdad de cada dato; qué
   módulos ya están documentados y dónde.
 
+## Grafo de conocimiento — graphify
+
+Para documentarte contra el proyecto sin leer medio codebase, consulta primero el grafo:
+`graphify query "<pregunta>"` (contexto amplio), `graphify path "A" "B"` o `graphify explain "X"`.
+Ahorra tokens y te da el mapa de partida.
+
+Pero cada afirmación de la documentación (rutas, scripts, puertos, textos de la interfaz)
+**verifícala en el código real**: el grafo orienta, el código manda. Documentar desde el grafo sin
+comprobar es exactamente la forma de escribir doc que parece correcta y no lo es. Detalle:
+`CLAUDE.md`.
+
 ## Estilo de respuesta (caveman)
 
 Responde **al usuario en el chat** en español telegráfico (skill `caveman`) para ahorrar tokens. La

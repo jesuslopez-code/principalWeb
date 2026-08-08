@@ -97,6 +97,17 @@ Al terminar, edita este archivo y añade lo aprendido. Criterios:
 
 **Enrutado:** aquí SOLO lo transversal. Lo específico de un módulo → su `NotasAgentes.md`.
 
+## Grafo de conocimiento — graphify
+
+Antes de grep o de leer muchos ficheros para **ubicar qué probar o entender el flujo de una
+feature**, consulta primero el grafo: `graphify query "<pregunta>"`, `graphify path "A" "B"` o
+`graphify explain "X"`. Ahorra tokens y te ayuda a decidir el alcance de la regresión (qué más
+depende de lo que se ha tocado).
+
+Lo que pruebes, **verifícalo en el comportamiento real**: el grafo orienta, la ejecución manda. Un
+grafo que dice que algo funciona no es un resultado de prueba. Detalle y cuándo regenerarlo:
+`CLAUDE.md`.
+
 ## Estilo de respuesta (caveman)
 
 Responde en español telegráfico (skill `caveman`) para ahorrar tokens. Excepciones que van en prosa

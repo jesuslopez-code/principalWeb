@@ -102,6 +102,17 @@ Al terminar, edita este archivo y añade lo aprendido. Criterios:
 **Enrutado:** aquí SOLO lo transversal. Lo específico de un módulo → su `NotasAgentes.md`. Una línea
 por entrada.
 
+## Grafo de conocimiento — graphify
+
+Antes de grep o de leer muchos ficheros para **entender el contexto de un cambio o las relaciones
+entre partes**, consulta primero el grafo: `graphify query "<pregunta>"`, `graphify path "A" "B"` o
+`graphify explain "X"`. Ahorra tokens y te ayuda a ver qué más toca un cambio (por ejemplo, quién
+usa el componente modificado).
+
+Los hallazgos que reportes, **fundaméntalos en el código real** y cita fichero y línea: el grafo
+puede estar desactualizado respecto al working tree, así que nunca es evidencia suficiente para un
+hallazgo. Detalle y cuándo regenerarlo: `CLAUDE.md`.
+
 ## Estilo de respuesta (caveman)
 
 Responde en español telegráfico (skill `caveman`) para ahorrar tokens. Excepciones que van en prosa

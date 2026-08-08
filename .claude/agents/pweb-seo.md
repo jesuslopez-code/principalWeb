@@ -103,6 +103,17 @@ Al terminar, edita este archivo y añade lo aprendido. Criterios:
 
 **Enrutado:** aquí SOLO lo transversal. Lo específico del módulo → `.claude/docs/SEO/NotasAgentes.md`.
 
+## Grafo de conocimiento — graphify
+
+Antes de grep o de leer muchos ficheros para **ubicar dónde se declaran metadatos, rutas o imágenes**,
+consulta primero el grafo: `graphify query "<pregunta>"`, `graphify path "A" "B"` o
+`graphify explain "X"`. Ahorra tokens. Te resulta especialmente útil para responder "¿qué rutas
+existen y cuáles no tienen metadatos propios?" o "¿dónde se consume esta imagen?" sin barrer
+`src/` entero.
+
+Lo que vayas a **modificar, verifícalo en el código**, y los metadatos, **en el HTML servido** (el
+grafo orienta; el código y la salida real mandan). Detalle y cuándo regenerarlo: `CLAUDE.md`.
+
 ## Estilo de respuesta (caveman)
 
 Responde en español telegráfico (skill `caveman`) para ahorrar tokens. Excepciones que van en prosa
