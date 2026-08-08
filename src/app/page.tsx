@@ -1,13 +1,12 @@
-import Image from "next/image";
 import Link from "next/link";
 import {
   Database,
+  Github,
   GitBranch,
   Linkedin,
   Mail,
   MoveRight,
   Server,
-  Globe,
   PanelTop,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -15,7 +14,6 @@ import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -25,25 +23,26 @@ import { ContactForm } from "@/components/contact-form";
 import { Header } from "@/components/header";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-const heroImage = PlaceHolderImages.find((img) => img.id === "hero-background");
 const profilePicture = PlaceHolderImages.find(
   (img) => img.id === "profile-picture"
 );
 
 const projects = [
   {
-    id: "project-1",
-    title: "Proyecto 1: Landing Page Corporativa Dinámica",
+    id: "iglesia-barbate",
+    title: "Iglesia El Camino",
     description:
-      "Maquetación de una página web estática para una empresa ficticia, enfocada en una estructura semántica con HTML5 y estilos con CSS3",
-    liveLink: "/web1",
+      "Sitio web de una iglesia evangélica en Barbate, en producción. Angular 21 con componentes standalone, Bootstrap 5 y despliegue continuo mediante GitHub Actions.",
+    technologies: ["Angular 21", "TypeScript", "Bootstrap 5", "GitHub Actions"],
+    repoLink: "https://github.com/jesuslopez-code/iglesia-barbate",
   },
   {
-    id: "project-2",
-    title: "Proyecto 2: Aplicación Web Interactiva",
+    id: "prueba-tecnica-back",
+    title: "API de Productos y Clientes",
     description:
-      "Desarrollo de una landing page con diseño responsive, asegurando una correcta visualización en dispositivos móviles, tablets y escritorio usando Flexbox y Media Queries",
-    liveLink: "/web2",
+      "API REST con arquitectura en capas, donde los controladores dependen de servicios y estos de repositorios a través de interfaces. Entity Framework Core con migraciones, AutoMapper y Docker.",
+    technologies: [".NET 8", "C#", "EF Core", "SQL Server", "Docker"],
+    repoLink: "https://github.com/jesuslopez-code/pruebaTecnicaBack",
   },
 ];
 
@@ -80,17 +79,6 @@ const skills = [
 function HeroSection() {
   return (
     <section className="relative w-full py-20 md:py-32 lg:py-40">
-      {heroImage && (
-        <Image
-          src={heroImage.imageUrl}
-          alt={heroImage.description}
-          fill
-          className="object-cover"
-          data-ai-hint={heroImage.imageHint}
-          priority
-        />
-      )}
-      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
       <div className="container relative z-10 mx-auto px-4 md:px-6 text-center">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-primary">
@@ -163,42 +151,36 @@ function ProjectsSection() {
             </h2>
             <div className="w-24 h-1.5 bg-primary rounded-full mx-auto"></div>
             <p className="mx-auto max-w-[700px] text-foreground/80 md:text-xl">
-              Aquí puedes encontrar una selección de mis trabajos recientes. Cada proyecto es un reflejo de mi habilidad para adaptarme a diferentes estilos y requisitos técnicos, siempre con un enfoque en el diseño responsive y la experiencia de usuario.
+              Una selección de trabajos con su código abierto, para que puedas ver cómo están construidos por dentro y no solo cómo se ven por fuera.
             </p>
           </div>
         </div>
         <div className="mx-auto grid max-w-5xl items-start gap-8 py-12 sm:grid-cols-1 md:grid-cols-2 lg:max-w-4xl">
-          {projects.map((project) => {
-            const image = PlaceHolderImages.find((img) => img.id === project.id);
-            return (
-              <Card key={project.id} className="h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1">
-                {image && (
-                  <Image
-                    src={image.imageUrl}
-                    alt={image.description}
-                    width={600}
-                    height={400}
-                    className="w-full h-48 object-cover"
-                    data-ai-hint={image.imageHint}
-                  />
-                )}
-                <CardHeader>
-                  <CardTitle>{project.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <p className="text-sm text-foreground/80 mb-4">{project.description}</p>
-                </CardContent>
-                <CardFooter>
-                  <Button asChild className="w-full" variant="outline">
-                  <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
-                      <Globe className="mr-2 h-4 w-4" />
-                      Ver Proyecto en Vivo
-                    </a>
-                  </Button>
-                </CardFooter>
-              </Card>
-            );
-          })}
+          {projects.map((project) => (
+            <Card key={project.id} className="h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1">
+              <CardHeader>
+                <CardTitle>{project.title}</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-grow space-y-4">
+                <p className="text-sm text-foreground/80">{project.description}</p>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <Badge key={tech} variant="outline" className="border-primary/50 text-primary">
+                      {tech}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button asChild className="w-full" variant="outline">
+                  <a href={project.repoLink} target="_blank" rel="noopener noreferrer">
+                    <Github className="mr-2 h-4 w-4" />
+                    Ver código en GitHub
+                  </a>
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
         </div>
       </div>
     </section>
