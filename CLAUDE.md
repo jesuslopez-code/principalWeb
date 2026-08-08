@@ -43,11 +43,12 @@ Reglas de arquitectura a tener presentes antes de tocar código:
 Anotado aquí porque condiciona cualquier cambio; se resuelve en las fases de
 `plan-implementacion.md`:
 
-- `next.config.ts` desactiva la red de seguridad del build: `typescript.ignoreBuildErrors` y
-  `eslint.ignoreDuringBuilds` están en `true`. Un error de tipos **no rompe el build**, así que
-  ejecutar `npm run typecheck` aparte es obligatorio antes de dar algo por bueno.
-- El repo viene de una plantilla de Firebase Studio y está a medio desacoplar de Firebase.
-- El SEO es mínimo: solo `title` y `description` en el layout.
+- El SEO es mínimo: solo `title` y `description` en el layout (Fase 3).
+- Las fuentes se cargan con `<link>` bloqueante a Google Fonts en vez de `next/font`. Es el aviso de
+  lint `@next/next/no-page-custom-font` que queda abierto a propósito; lo resuelve `pweb-seo` en la
+  Fase 4.
+- No hay imagen de portada: la que había apuntaba por URL absoluta a un fichero inexistente y se
+  retiró. El hero va sobre el fondo del tema hasta que el rediseño visual decida qué lleva.
 
 ## Usar los agentes adecuados
 
@@ -132,18 +133,19 @@ agente correspondiente; lo específico de un módulo → su `NotasAgentes.md`.
 - **Credenciales del servicio de formularios** (el endpoint de contacto). No rotarlas ni cambiarlas
   desde un agente.
 
-## Estado del repositorio (importante al empezar)
+## Estado del repositorio
 
-La rama de trabajo es `limpieza-y-seo`. Hay una limpieza grande **sin commitear** en el working
-tree: se han borrado Firebase (`src/firebase/`, `firestore.rules`, `apphosting.yaml`), las
-primitivas shadcn no usadas, las demos estáticas `public/web1` y `public/web2`, y la config de
-Firebase Studio. Consecuencias a tener presentes:
+`main` está limpio y desplegado. Fases 1 y 2 cerradas: Firebase eliminado, plantillas estáticas
+borradas, primitivas shadcn sin usar retiradas, y la red de seguridad del build restaurada.
 
-- `src/app/layout.tsx` **todavía importa** `@/firebase/client-provider`, que ya no existe: el build
-  está roto hasta que se arregle (Fase 1).
-- Las tarjetas de la sección Projects apuntan a `/web1` y `/web2`, que ya no existen.
-
-Antes de diagnosticar cualquier error, comprobar si viene de esta limpieza a medias.
+- **El build ejecuta las comprobaciones.** `next.config.ts` ya no lleva `ignoreBuildErrors` ni
+  `ignoreDuringBuilds`: un error de tipos o de lint rompe el build, como debe ser.
+- **Lint con ESLint 9 en flat config** (`eslint.config.mjs`), script `eslint .`. El anterior
+  `next lint` está deprecado y desaparece en Next 16, así que no se usa.
+- **Dos avisos de lint abiertos a propósito:** la carga de fuentes con `<link>` (la resuelve
+  `pweb-seo` en la Fase 4) y `actionTypes` en `use-toast.ts`, que es código generado por shadcn.
+  Que aparezcan es correcto; no los silencies sin decirlo.
+- La sección Proyectos enlaza a los repositorios de GitHub. Las fichas propias llegan en la Fase 5.
 
 ## Definición de "terminado"
 

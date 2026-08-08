@@ -158,19 +158,20 @@ Dos avisos con esta skill en este proyecto concreto:
 4. Si añades o quitas una sección de la home, **actualiza también `navLinks` en
    `src/components/header.tsx`**: la navegación son anclas y se desincroniza con facilidad.
 5. Si añades una ruta, avisa para que `pweb-seo` le ponga metadatos y la meta en el sitemap.
-6. **`npm run typecheck` antes de dar nada por terminado.** El build tiene desactivadas las
-   comprobaciones de tipos y de lint en `next.config.ts` (Fase 2 lo corrige), así que un error de
-   tipos no rompe el build y pasa desapercibido.
-7. **No borres ficheros.** Hay una limpieza sin commitear en curso; si algo sobra, dilo y que decida
-   Jesús. Tampoco hagas commit.
+6. **`npm run typecheck` y `npm run lint` antes de dar nada por terminado.** Desde la Fase 2 el
+   build también las ejecuta y falla si algo está mal, pero comprobarlo antes es más rápido que
+   esperar a un build completo. Hay dos avisos abiertos a propósito (fuentes con `<link>` y
+   `actionTypes` de shadcn): no los silencies ni los cuentes como fallo tuyo.
+7. **No borres ficheros.** Si algo sobra, dilo y que decida Jesús. Tampoco hagas commit.
 
-## Estado del repositorio (léelo antes de diagnosticar nada)
+## Estado del repositorio
 
-Rama `limpieza-y-seo`, con una limpieza grande **sin commitear**: se borraron Firebase, las
-primitivas shadcn no usadas y las demos `public/web1` y `public/web2`. Por eso ahora mismo
-`src/app/layout.tsx` importa `@/firebase/client-provider`, que ya no existe (el build está roto), y
-las tarjetas de Projects apuntan a `/web1` y `/web2`, que dan 404. Está recogido en `fixes.md` y se
-arregla en la Fase 1.
+`main` está limpio y desplegado; las Fases 1 y 2 están cerradas. Firebase eliminado, plantillas
+estáticas borradas, y el build vuelve a ejecutar comprobaciones de tipos y de lint.
+
+La sección Proyectos enlaza a los repositorios de GitHub (`iglesia-barbate`, `pruebaTecnicaBack`);
+las fichas propias en `/proyectos/[slug]` llegan en la Fase 5. El hero no tiene imagen de fondo: la
+anterior apuntaba a un fichero inexistente y se retiró, y qué lleva lo decide el rediseño visual.
 
 ## Convenciones de UI concretas
 
