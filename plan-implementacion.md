@@ -29,8 +29,8 @@ lo demás; después llega el crecimiento de contenido y la capa visual.
 
 | # | Fase | Objetivo (una frase) | Estado |
 |---|------|----------------------|--------|
-| 1 | Cerrar la limpieza | Dejar el build verde tras el desacople de Firebase y las demos borradas | pendiente |
-| 2 | Red de seguridad | Recuperar typecheck y lint como barrera real antes de desplegar | pendiente |
+| 1 | Cerrar la limpieza | Dejar el build verde tras el desacople de Firebase y las demos borradas | hecho |
+| 2 | Red de seguridad | Recuperar typecheck y lint como barrera real antes de desplegar | hecho |
 | 3 | SEO base | Metadatos completos, `robots.ts`, `sitemap.ts` y JSON-LD | pendiente |
 | 4 | Rendimiento y accesibilidad | Fuentes, imágenes y semántica al nivel que exigen los Core Web Vitals | pendiente |
 | 5 | Casos de estudio | Ruta `/proyectos` y `/proyectos/[slug]` con fichas de proyecto reales | pendiente |

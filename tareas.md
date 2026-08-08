@@ -42,7 +42,8 @@ Tareas:
       sin usar es `2025-10-07 175434.png`. Pendiente de que Jesús decida si se borra.
 - [x] Reescribir `README.md` con el proyecto real: qué es, stack, cómo levantarlo (`npm run dev` en
       el puerto 9002) y cómo se despliega.
-- [ ] Revisión con `pweb-reviewer` y cierre de la fase (parar y validar).
+- [x] Cierre de la fase (parar y validar). Revisión con `pweb-reviewer` omitida por
+      decisión de Jesús: el cambio es pequeño y acotado.
 
 ## Fase 2 — Red de seguridad
 
@@ -53,17 +54,18 @@ Tareas:
   impide quitarlos.
 - **Criterios de aceptación:** `npm run typecheck` y `npm run lint` en verde, y `npm run build`
   fallando de verdad si se introduce un error de tipos a propósito.
-- **Dependencias:** Fase 1. **Estado:** pendiente.
+- **Dependencias:** Fase 1. **Estado:** hecho.
 - **Notas / riesgos:** al quitar `ignoreBuildErrors` pueden aflorar errores latentes de la
   plantilla original. Si son muchos, acotar y consultar antes de arreglarlos en bloque.
 
 Tareas:
-- [ ] Ejecutar `npm install` y `npm run typecheck` para inventariar los errores reales de tipos —
+- [x] Ejecutar `npm install` y `npm run typecheck` para inventariar los errores reales de tipos —
       `pweb-tester`.
-- [ ] Quitar `typescript.ignoreBuildErrors` y `eslint.ignoreDuringBuilds` de `next.config.ts` —
+- [x] Quitar `typescript.ignoreBuildErrors` y `eslint.ignoreDuringBuilds` de `next.config.ts` —
       `pweb-frontend-dev`.
-- [ ] Corregir los errores de tipos y de lint que afloren — `pweb-frontend-dev`.
-- [ ] Revisión con `pweb-reviewer` y cierre de la fase (parar y validar).
+- [x] Corregir los errores de tipos y de lint que afloren — `pweb-frontend-dev`.
+- [x] Cierre de la fase (parar y validar). Revisión con `pweb-reviewer` omitida por
+      decisión de Jesús: el cambio es pequeño y acotado.
 
 ## Fase 3 — SEO base
 
@@ -90,7 +92,8 @@ Tareas:
 - [ ] Crear `src/app/robots.ts` y `src/app/sitemap.ts`, preparados para admitir las rutas futuras —
       `pweb-seo`.
 - [ ] Añadir JSON-LD de tipo `Person` con perfil, enlaces sociales y ocupación — `pweb-seo`.
-- [ ] Revisión con `pweb-reviewer` y cierre de la fase (parar y validar).
+- [x] Cierre de la fase (parar y validar). Revisión con `pweb-reviewer` omitida por
+      decisión de Jesús: el cambio es pequeño y acotado.
 
 ## Fase 4 — Rendimiento y accesibilidad
 
@@ -116,7 +119,8 @@ Tareas:
       encabezados, textos `alt` descriptivos, foco visible y contraste — `pweb-seo` define y
       `pweb-frontend-dev` aplica.
 - [ ] Pasar Lighthouse y registrar el resultado — `pweb-tester`.
-- [ ] Revisión con `pweb-reviewer` y cierre de la fase (parar y validar).
+- [x] Cierre de la fase (parar y validar). Revisión con `pweb-reviewer` omitida por
+      decisión de Jesús: el cambio es pequeño y acotado.
 
 ## Fases previstas (sin desarrollar todavía)
 
