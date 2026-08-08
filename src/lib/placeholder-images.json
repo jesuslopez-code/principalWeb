@@ -1,34 +1,10 @@
 {
   "placeholderImages": [
     {
-      "id": "hero-background",
-      "description": "Abstract background for hero section",
-      "imageUrl": "https://jesuslopezweb.com/images/portada.jpeg",
-      "imageHint": "abstract code"
-    },
-    {
       "id": "profile-picture",
       "description": "Profile picture of Jesús López",
       "imageUrl": "/images/foto_profile.jpg",
       "imageHint": "profile picture"
-    },
-    {
-      "id": "project-1",
-      "description": "Screenshot of Corporate Landing Page project",
-      "imageUrl": "/images/Web_1.png",
-      "imageHint": "corporate website"
-    },
-    {
-      "id": "project-2",
-      "description": "Screenshot of Interactive Web Application project",
-      "imageUrl": "/images/web_2.png",
-      "imageHint": "web application"
-    },
-    {
-      "id": "project-3",
-      "description": "Screenshot of Administration Dashboard project",
-      "imageUrl": "/images/Web_3.png",
-      "imageHint": "dashboard admin"
     }
   ]
 }
