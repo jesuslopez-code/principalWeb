@@ -55,7 +55,10 @@ Delega el trabajo en el subagente que corresponda al área tocada, en vez de hac
 principal:
 
 - **`pweb-frontend-dev`** — código de producto: rutas y páginas, secciones, componentes,
-  contenidos, formulario, estilos Tailwind y tokens, responsive, primitivas shadcn.
+  contenidos, formulario, estilos Tailwind y tokens, responsive, primitivas shadcn. Para trabajo de
+  **dirección de arte** (paleta, tipografías, concepto de layout, elemento firma) usa la skill
+  global **`frontend-design`** antes de codificar; su salida se traduce a tokens HSL en
+  `globals.css` y `tailwind.config.ts`, nunca a colores literales.
 - **`pweb-seo`** — metadatos de App Router, OpenGraph y canonical, `robots.ts` y `sitemap.ts`,
   JSON-LD, HTML semántico, accesibilidad y rendimiento (Core Web Vitals, `next/font`, `next/image`).
 - **`pweb-reviewer`** — revisar cambios antes de commit/merge: corrección, imports huérfanos,

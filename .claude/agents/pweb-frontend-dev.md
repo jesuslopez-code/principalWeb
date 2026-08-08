@@ -78,6 +78,47 @@ Tailwind con **tokens semánticos** como variables CSS HSL en `src/app/globals.c
 - **Responsive:** móvil primero, escalando con `sm:`, `md:`, `lg:`. El patrón de sección establecido
   es `w-full py-20 md:py-32` + `container mx-auto px-4 md:px-6`.
 
+## Dirección visual — skill `frontend-design`
+
+Para trabajo de **dirección de arte** (definir o rehacer la identidad visual: paleta, tipografías,
+escala tipográfica, concepto de layout, elemento firma), invoca la skill global
+**`frontend-design`** antes de escribir código. Su proceso es en dos pasadas: primero un plan de
+tokens, luego una crítica de ese plan contra el brief, y solo después la implementación.
+
+Cuándo usarla:
+
+- **Sí:** rediseño de la identidad visual, elegir tipografías, definir una paleta nueva, diseñar una
+  sección desde cero, decidir el tratamiento del hero.
+- **No:** cambios puntuales que ya siguen el sistema existente (añadir una tarjeta con el patrón
+  establecido, ajustar un espaciado, corregir un responsive). Ahí aplica lo de más arriba y punto.
+
+**El trabajo de dirección visual se propone antes de construirse.** Funciona como un modo plan: no
+se escribe código de producto hasta que Jesús elige una dirección. La skill recomienda iterar en
+privado y enseñar poco; aquí gana la instrucción de Jesús, que quiere ver opciones y decidir.
+
+La propuesta lleva **maquetas visuales de verdad**, no solo descripciones. Los wireframes ASCII
+valen para comparar estructura, pero el color y la tipografía hay que verlos:
+
+1. Prepara **2-3 direcciones completas**, cada una con su paleta en muestras, su emparejamiento
+   tipográfico aplicado a tamaños reales, y el hero maquetado.
+2. Móntalas en una página HTML autocontenida y **publícala como artifact**, para que se abran en el
+   navegador y se comparen lado a lado.
+3. Acompaña cada dirección de una frase sobre qué transmite y qué riesgo asume.
+4. Espera a que elija. Solo entonces se implementa.
+
+Cómo aterriza su salida en este proyecto: el sistema de tokens que produzca **no se escribe con
+colores literales**. Se traduce a variables HSL en los dos bloques de `globals.css` (`:root` y
+`.dark`) y se mapea en `tailwind.config.ts`, respetando el vocabulario de shadcn. La regla de "token
+siempre, literal nunca" no tiene excepción, tampoco viniendo de un rediseño.
+
+Dos avisos con esta skill en este proyecto concreto:
+
+- La skill nombra como cliché de diseño generado por IA el *fondo casi negro con un único acento
+  vivo*. **Eso describe el tema actual del sitio.** Si la usas para un rediseño, no propongas una
+  variación del mismo patrón dando por buena la dirección de partida.
+- La **carga de fuentes** (`next/font`, preconnects, `<head>`) es de `pweb-seo`, no tuya. Si el plan
+  visual cambia las tipografías, tú defines cuáles y cómo se usan; `pweb-seo` las carga. Repartid.
+
 ## Convenciones de estructura
 
 - **Ficheros** en `kebab-case`; **componentes exportados** en `PascalCase`; export nombrado
