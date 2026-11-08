@@ -69,3 +69,18 @@ acabarán compartiéndose con esas rutas.
 
 ---
 _Este fichero lo amplían los agentes por auto-actualización con lo que aprenden en el módulo._
+
+## Actualización 2026-11-08 — fila de Base Estelar
+
+- La sección Proyectos vive ya en `src/components/projects-section.tsx` (no en `page.tsx`). La fila
+  de Base Estelar usa `visual: { kind: "demo", id: "base-estelar" }` y renderiza `BaseEstelarDemo`
+  (cliente) en lugar de las capturas; `base-estelar-oficina/detalle` quedan sin uso en el JSON.
+- Demo: motor en `src/lib/base-estelar-animacion.ts`, estilos acotados en
+  `src/components/base-estelar-demo.css` (los `--kp-*` son la paleta de la app Base Estelar, no de
+  la web; no tocarlos con tokens de la web). Bundle 3D en `public/base-estelar/estacion-3d.js`,
+  cargado solo al pulsar «Estación 3D»; excluido del lint. Si cambia la maqueta aprobada, se
+  regenera el bundle copiando sus líneas 469-4689.
+- El bucle se pausa fuera de pantalla (`IntersectionObserver`) y con `prefers-reduced-motion` se
+  pinta el estado final estático.
+- El hero ya no lleva imagen (`hero-bg`); los avisos de `/web1`, `/web2`, `project-3` y la imagen
+  externa del hero de arriba están obsoletos.

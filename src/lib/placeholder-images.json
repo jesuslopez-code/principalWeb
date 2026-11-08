@@ -2,9 +2,15 @@
   "placeholderImages": [
     {
       "id": "profile-picture",
-      "description": "Profile picture of Jesús López",
+      "description": "Retrato de Jesús López",
       "imageUrl": "/images/foto_profile.jpg",
       "imageHint": "profile picture"
+    },
+    {
+      "id": "iglesia-el-camino",
+      "description": "Página de inicio del sitio web de Iglesia El Camino, en Barbate, publicada en icelcamino.com.",
+      "imageUrl": "/proyectos/iglesia-el-camino.png",
+      "imageHint": "church website homepage"
     }
   ]
 }

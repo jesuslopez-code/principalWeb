@@ -81,3 +81,10 @@ Lo que falta:
 
 ---
 _Este fichero lo amplían los agentes por auto-actualización con lo que aprenden en el módulo._
+
+## Paleta de OG e iconos (Fase 3B, violeta .NET)
+
+`opengraph-image.tsx`, `icon.svg` y `apple-icon.tsx` no leen variables CSS: llevan hex fijos
+equivalentes a los tokens `.dark` (`#0e0f16` fondo, `#e6e8f0` texto, `#989dae` apagado, `#9e77f8`
+primary, `#75d1bf` code-string, `#2b2d3b` borde). Si cambia la paleta en `globals.css`, actualizar
+estos tres a mano.

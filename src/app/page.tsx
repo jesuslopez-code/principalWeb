@@ -1,106 +1,183 @@
+import type { CSSProperties } from "react";
+import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  Database,
-  Github,
-  GitBranch,
-  Linkedin,
-  Mail,
-  MoveRight,
-  Server,
-  PanelTop,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import Image from "next/image";
+import { Github, Linkedin, MoveRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import { PlaceHolderImages } from "@/lib/placeholder-images";
+import { SITE_AVAILABLE, SITE_DESCRIPTION, SITE_LINKS, SITE_NAME, SITE_TITLE } from "@/lib/site";
 import { ContactForm } from "@/components/contact-form";
+import { CopyEmail } from "@/components/copy-email";
+import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { ProjectsSection } from "@/components/projects-section";
+import { SectionHeading } from "@/components/section-heading";
 
 const profilePicture = PlaceHolderImages.find(
   (img) => img.id === "profile-picture"
 );
 
-const projects = [
-  {
-    id: "iglesia-barbate",
-    title: "Iglesia El Camino",
-    description:
-      "Sitio web de una iglesia evangélica en Barbate, en producción. Angular 21 con componentes standalone, Bootstrap 5 y despliegue continuo mediante GitHub Actions.",
-    technologies: ["Angular 21", "TypeScript", "Bootstrap 5", "GitHub Actions"],
-    repoLink: "https://github.com/jesuslopez-code/iglesia-barbate",
+// openGraph se redeclara entero: Next sustituye el objeto del layout, no lo fusiona.
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "es_ES",
+    url: "/",
+    siteName: SITE_NAME,
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
   },
-  {
-    id: "prueba-tecnica-back",
-    title: "API de Productos y Clientes",
-    description:
-      "API REST con arquitectura en capas, donde los controladores dependen de servicios y estos de repositorios a través de interfaces. Entity Framework Core con migraciones, AutoMapper y Docker.",
-    technologies: [".NET 8", "C#", "EF Core", "SQL Server", "Docker"],
-    repoLink: "https://github.com/jesuslopez-code/pruebaTecnicaBack",
-  },
-];
+};
 
-const skills = [
+const skillLayers = [
   {
-    icon: PanelTop,
-    title: "Front-End",
-    description:
+    layer: "front",
+    fullName: "Front-End",
+    summary:
       "Construyo interfaces de usuario dinámicas, escalables y responsives, centradas en ofrecer una experiencia de usuario excepcional.",
     technologies: ["HTML5", "CSS3", "JavaScript", "TypeScript", "Angular", "React"],
   },
   {
-    icon: Server,
-    title: "Back-End",
-    description:
+    layer: "back",
+    fullName: "Back-End",
+    summary:
       "Diseño y desarrollo de APIs RESTful seguras y eficientes que forman el núcleo de la lógica de negocio de cualquier aplicación.",
     technologies: [".NET", "C#", "ASP.NET Core", "Entity Framework", "Node.js"],
   },
   {
-    icon: Database,
-    title: "Bases de Datos",
-    description:
+    layer: "datos",
+    fullName: "Bases de datos",
+    summary:
       "Gestiono la capa de acceso a datos de forma segura y optimizada, conectando la lógica de negocio con bases de datos relacionales.",
     technologies: ["SQL Server", "MySQL"],
   },
   {
-    icon: GitBranch,
-    title: "Herramientas",
-    description: "Uso de herramientas para control de versiones y gestión de proyectos.",
+    layer: "herramientas",
+    fullName: "Herramientas",
+    summary: "Uso de herramientas para control de versiones y gestión de proyectos.",
     technologies: ["Git", "GitHub"],
+  },
+];
+
+// Pares clave/valor de la ficha de Sobre mí: solo datos ya publicados en la web. Ampliable.
+const profileFacts: { key: string; value: string; available?: boolean }[] = [
+  { key: "rol", value: "Full-Stack" },
+  { key: "stack", value: ".NET · C# · Angular · SQL Server" },
+  {
+    key: "estado",
+    value: SITE_AVAILABLE ? "disponible" : "no disponible",
+    available: SITE_AVAILABLE,
   },
 ];
 
 function HeroSection() {
   return (
-    <section className="relative w-full py-20 md:py-32 lg:py-40">
-      <div className="container relative z-10 mx-auto px-4 md:px-6 text-center">
-        <div className="max-w-3xl mx-auto">
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl lg:text-7xl text-primary">
-            Jesús López
+    <section className="hero-bg relative w-full overflow-hidden py-20 md:py-32 lg:py-40">
+      <div className="container relative z-10 mx-auto grid items-center gap-12 px-4 md:px-6 lg:grid-cols-2 lg:gap-16">
+        <div>
+          <p
+            className="hero-reveal font-mono text-sm text-primary md:text-base"
+            style={{ "--delay": "0s" } as CSSProperties}
+          >
+            &gt; dotnet run --project full-stack
+            <span
+              aria-hidden="true"
+              className="cursor-blink ml-1 inline-block h-[1.1em] w-2 translate-y-[0.2em] bg-primary"
+            />
+          </p>
+          <h1
+            className="hero-reveal-rise mt-6 font-display text-6xl leading-[0.95] tracking-tight sm:text-7xl lg:text-8xl"
+            style={{ "--delay": "0.08s" } as CSSProperties}
+          >
+            Jesús <span className="italic text-primary">López</span>
           </h1>
-          <p className="mt-4 text-lg md:text-xl lg:text-2xl text-foreground/90">
+          <p
+            className="hero-reveal mt-5 font-mono text-sm uppercase tracking-widest text-muted-foreground md:text-base"
+            style={{ "--delay": "0.16s" } as CSSProperties}
+          >
             Desarrollador Web Full-Stack
           </p>
-          <p className="mt-6 max-w-2xl mx-auto text-base md:text-lg text-foreground/80">
-            Transformo ideas en código y soluciones digitales robustas. Mi pasión es construir aplicaciones web eficientes y escalables, cubriendo el ciclo completo desde el Back-End con .NET hasta el Front-End con Angular.
+          <p
+            className="hero-reveal mt-6 max-w-xl text-base text-foreground/80 md:text-lg"
+            style={{ "--delay": "0.24s" } as CSSProperties}
+          >
+            Transformo ideas en código y soluciones digitales robustas. Construyo aplicaciones web eficientes y escalables, del Back-End con .NET al Front-End con Angular.
           </p>
-          <div className="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+          <div
+            className="hero-reveal mt-10 flex flex-wrap items-center gap-x-6 gap-y-4"
+            style={{ "--delay": "0.32s" } as CSSProperties}
+          >
             <Button asChild size="lg">
               <Link href="#projects">
                 Ver mis proyectos
                 <MoveRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
-            <Button asChild size="lg" variant="secondary">
-              <Link href="#contact">Contactar</Link>
-            </Button>
+            <Link
+              href="#contact"
+              className="text-foreground/80 underline-offset-4 transition-colors hover:text-primary hover:underline"
+            >
+              Contactar
+            </Link>
+            <div className="flex items-center gap-4 text-muted-foreground">
+              <a
+                href={SITE_LINKS.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="transition-colors hover:text-primary"
+              >
+                <Github className="h-5 w-5" />
+              </a>
+              <a
+                href={SITE_LINKS.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="transition-colors hover:text-primary"
+              >
+                <Linkedin className="h-5 w-5" />
+              </a>
+            </div>
           </div>
+        </div>
+
+        <div
+          aria-hidden="true"
+          className="hero-reveal overflow-hidden rounded-lg border border-border bg-card shadow-2xl shadow-primary/5"
+          style={{ "--delay": "0.4s" } as CSSProperties}
+        >
+          <div className="flex items-center gap-2 border-b border-border bg-secondary px-4 py-3">
+            <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
+            <span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" />
+            <span className="h-2.5 w-2.5 rounded-full bg-primary/70" />
+            <span className="ml-3 font-mono text-xs text-muted-foreground">Developer.cs</span>
+          </div>
+          <pre className="overflow-x-auto p-5 font-mono text-xs leading-relaxed text-foreground/90 sm:text-sm">
+            <code>
+              <span className="text-primary">public record</span> Developer({"\n"}
+              {"    "}
+              <span className="text-primary">string</span> Nombre = <span className="text-code-string">&quot;Jesús López&quot;</span>,{"\n"}
+              {"    "}
+              <span className="text-primary">string</span>[] Stack = [{"\n"}
+              {"        "}
+              <span className="text-code-string">&quot;.NET 8&quot;</span>, <span className="text-code-string">&quot;C#&quot;</span>, <span className="text-code-string">&quot;Angular&quot;</span>,{"\n"}
+              {"        "}
+              <span className="text-code-string">&quot;SQL Server&quot;</span>, <span className="text-code-string">&quot;Docker&quot;</span>{"\n"}
+              {"    "}],{"\n"}
+              {"    "}
+              <span className="text-primary">bool</span> Disponible = <span className="text-primary">{String(SITE_AVAILABLE)}</span>{"\n"}
+              );{"\n"}
+              <span className="text-muted-foreground">{"// Listo para el siguiente reto."}</span>
+            </code>
+          </pre>
         </div>
       </div>
     </section>
@@ -109,24 +186,45 @@ function HeroSection() {
 
 function AboutSection() {
   return (
-    <section id="about" className="w-full py-20 md:py-32 bg-background">
+    <section id="about" aria-labelledby="about-title" className="w-full py-20 md:py-32 bg-background">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid gap-12 lg:grid-cols-5 lg:gap-16 items-center">
-          <div className="lg:col-span-2 flex justify-center">
+        <div className="grid items-start gap-10 lg:grid-cols-[14rem_1fr] lg:gap-16">
+          <div className="w-44 lg:w-56">
             {profilePicture && (
-              <Avatar className="h-64 w-64 border-4 border-primary/50 shadow-lg">
-                <AvatarImage src={profilePicture.imageUrl} alt={profilePicture.description} className="object-cover" />
-                <AvatarFallback>JL</AvatarFallback>
-              </Avatar>
+              <div className="relative aspect-[4/5] overflow-hidden rounded-lg border border-border">
+                <Image
+                  src={profilePicture.imageUrl}
+                  alt="Retrato de Jesús López"
+                  fill
+                  sizes="(min-width: 1024px) 224px, 176px"
+                  className="object-cover grayscale"
+                />
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 bg-primary/30 mix-blend-multiply"
+                />
+              </div>
             )}
           </div>
-          <div className="space-y-6 lg:col-span-3">
-            <div className="space-y-3">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                Hola, soy Jesús
-              </h2>
-              <div className="w-24 h-1.5 bg-primary rounded-full"></div>
-            </div>
+          <div className="space-y-6">
+            <SectionHeading id="about-title" index="01" label="sobre mí">
+              Hola, soy Jesús
+            </SectionHeading>
+            <dl className="grid grid-cols-[auto_1fr] gap-x-6 gap-y-2 rounded-lg border border-border bg-card p-4 font-mono text-sm">
+              {profileFacts.map((fact) => (
+                <div key={fact.key} className="contents">
+                  <dt className="text-muted-foreground">{fact.key}</dt>
+                  <dd className="text-foreground">
+                    {fact.available && (
+                      <span aria-hidden="true" className="mr-2 text-primary">
+                        ●
+                      </span>
+                    )}
+                    {fact.value}
+                  </dd>
+                </div>
+              ))}
+            </dl>
             <p className="text-lg text-foreground/80">
               Soy un desarrollador web con un objetivo claro: crear y mantener aplicaciones web de alto rendimiento. Mi rol como Desarrollador Full-Stack me permite tener una visión completa del producto, garantizando que cada pieza, desde la base de datos hasta la interfaz de usuario, funcione en perfecta armonía.
             </p>
@@ -140,85 +238,27 @@ function AboutSection() {
   );
 }
 
-function ProjectsSection() {
-  return (
-    <section id="projects" className="w-full py-20 md:py-32 bg-secondary">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <div className="space-y-3">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              Portafolio de Proyectos
-            </h2>
-            <div className="w-24 h-1.5 bg-primary rounded-full mx-auto"></div>
-            <p className="mx-auto max-w-[700px] text-foreground/80 md:text-xl">
-              Una selección de trabajos con su código abierto, para que puedas ver cómo están construidos por dentro y no solo cómo se ven por fuera.
-            </p>
-          </div>
-        </div>
-        <div className="mx-auto grid max-w-5xl items-start gap-8 py-12 sm:grid-cols-1 md:grid-cols-2 lg:max-w-4xl">
-          {projects.map((project) => (
-            <Card key={project.id} className="h-full flex flex-col overflow-hidden transition-all duration-300 hover:shadow-primary/20 hover:shadow-lg hover:-translate-y-1">
-              <CardHeader>
-                <CardTitle>{project.title}</CardTitle>
-              </CardHeader>
-              <CardContent className="flex-grow space-y-4">
-                <p className="text-sm text-foreground/80">{project.description}</p>
-                <div className="flex flex-wrap gap-2">
-                  {project.technologies.map((tech) => (
-                    <Badge key={tech} variant="outline" className="border-primary/50 text-primary">
-                      {tech}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-              <CardFooter>
-                <Button asChild className="w-full" variant="outline">
-                  <a href={project.repoLink} target="_blank" rel="noopener noreferrer">
-                    <Github className="mr-2 h-4 w-4" />
-                    Ver código en GitHub
-                  </a>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
 function SkillsSection() {
   return (
-    <section id="skills" className="w-full py-20 md:py-32">
+    <section id="skills" aria-labelledby="skills-title" className="w-full py-20 md:py-32">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <div className="space-y-3">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-              Habilidades y Tecnologías
-            </h2>
-             <div className="w-24 h-1.5 bg-primary rounded-full mx-auto"></div>
-          </div>
-        </div>
-        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-8 py-12 sm:grid-cols-2">
-          {skills.map((skill) => (
-            <Card key={skill.title} className="p-6 flex flex-col items-start gap-4 transition-all duration-300 hover:border-primary/50">
-              <div className="flex items-center gap-4">
-                 <div className="bg-primary/10 p-3 rounded-full">
-                    <skill.icon className="h-6 w-6 text-primary" />
-                 </div>
-                <h3 className="text-2xl font-bold">{skill.title}</h3>
-              </div>
-              <p className="text-sm text-foreground/80">{skill.description}</p>
-              <div className="flex flex-wrap gap-2 pt-2">
-                {skill.technologies.map((tech) => (
-                  <Badge key={tech} variant="outline" className="border-primary/50 text-primary">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
-            </Card>
+        <SectionHeading id="skills-title" index="03" label="habilidades">
+          Habilidades y tecnologías
+        </SectionHeading>
+        <dl className="mt-12 divide-y divide-border overflow-hidden rounded-lg border border-border bg-card font-mono text-sm">
+          {skillLayers.map((item) => (
+            <div key={item.layer} className="grid gap-2 p-4 md:grid-cols-[10rem_1fr] md:gap-6 md:p-5">
+              <dt className="text-primary">
+                <span aria-hidden="true">&gt; {item.layer}</span>
+                <span className="sr-only">{item.fullName}</span>
+              </dt>
+              <dd className="space-y-1">
+                <p className="text-foreground">{item.technologies.join(" · ")}</p>
+                <p className="font-body text-muted-foreground">{item.summary}</p>
+              </dd>
+            </div>
           ))}
-        </div>
+        </dl>
       </div>
     </section>
   );
@@ -227,23 +267,43 @@ function SkillsSection() {
 
 function ContactSection() {
   return (
-    <section id="contact" className="w-full py-20 md:py-32 bg-secondary">
+    <section id="contact" aria-labelledby="contact-title" className="w-full py-20 md:py-32 bg-secondary">
       <div className="container mx-auto px-4 md:px-6">
         <div className="grid gap-10 lg:grid-cols-2">
           <div className="space-y-6">
-            <div className="space-y-3">
-              <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
-                ¿Hablamos?
-              </h2>
-              <div className="w-24 h-1.5 bg-primary rounded-full"></div>
-            </div>
+            <SectionHeading id="contact-title" index="04" label="contacto">
+              ¿Hablamos?
+            </SectionHeading>
+            {SITE_AVAILABLE && (
+              <p className="font-mono text-sm text-foreground">
+                <span aria-hidden="true" className="mr-2 text-primary">
+                  ●
+                </span>
+                disponible
+              </p>
+            )}
             <p className="text-lg text-foreground/80">
               Estoy buscando activamente nuevos desafíos y oportunidades para aportar mi experiencia. Si tienes un proyecto en mente, una vacante en tu equipo o simplemente quieres conectar, no dudes en contactarme.
             </p>
-            <div className="space-y-4">
-              <a href="https://www.linkedin.com/in/jesús-lópez-serrano" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 group">
-                <Linkedin className="h-6 w-6 text-primary" />
-                <span className="text-lg group-hover:underline">LinkedIn</span>
+            <CopyEmail email={SITE_LINKS.email} />
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-sm">
+              <a
+                href={SITE_LINKS.linkedin}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-foreground/80 underline-offset-4 transition-colors hover:text-primary hover:underline"
+              >
+                <Linkedin className="h-4 w-4" />
+                LinkedIn
+              </a>
+              <a
+                href={SITE_LINKS.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-foreground/80 underline-offset-4 transition-colors hover:text-primary hover:underline"
+              >
+                <Github className="h-4 w-4" />
+                GitHub
               </a>
             </div>
           </div>
@@ -258,20 +318,6 @@ function ContactSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-function Footer() {
-  return (
-    <footer className="w-full py-6 bg-background border-t border-border/40">
-      <div className="container mx-auto px-4 md:px-6 flex flex-col md:flex-row items-center justify-between text-sm text-foreground/60">
-        <p>&copy; {new Date().getFullYear()} Jesús López. Todos los derechos reservados.</p>
-        <div className="flex gap-4 mt-4 md:mt-0">
-          <Link href="https://www.linkedin.com/in/jesús-lópez-serrano" target="_blank" rel="noopener noreferrer" className="hover:text-primary"><Linkedin className="h-5 w-5"/></Link>
-          <Link href="mailto:contacto@jesuslopezweb.com" className="hover:text-primary"><Mail className="h-5 w-5"/></Link>
-        </div>
-      </div>
-    </footer>
   );
 }
 

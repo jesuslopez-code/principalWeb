@@ -22,14 +22,14 @@ resultado de la limpieza a medias y se resuelven en la Fase 1.
 
 ## FIX-002 — Enlaces muertos en la sección Projects
 
-- **Estado:** ⏳ PENDIENTE
+- **Estado:** ✅ ARREGLADA (commit `cfebd1b`)
 - **Dónde:** `src/app/page.tsx`, constante `projects`.
 - **Problema:** las dos tarjetas enlazan a `/web1` y `/web2`, demos estáticas que se borraron de
   `public/`. El botón "Ver Proyecto en Vivo" lleva a un 404.
 - **Causa:** misma limpieza sin commitear.
-- **Solución:** pendiente. **Bloqueada por decisión de Jesús:** se retiran las tarjetas, pero qué
-  queda en la sección es una pregunta abierta que no decide un agente.
-- **Verificación:** pendiente.
+- **Solución:** por decisión de Jesús, las tarjetas se sustituyeron por dos proyectos reales que
+  enlazan a sus repositorios de GitHub (`iglesia-barbate` y `pruebaTecnicaBack`).
+- **Verificación:** no queda ninguna referencia a `/web1`, `/web2` ni `project-*` en `src/`.
 
 ## FIX-003 — `label.tsx` borrado por error rompía el formulario de contacto
 
@@ -58,3 +58,37 @@ resultado de la limpieza a medias y se resuelven en la Fase 1.
   `NODE_ENV=production` por sí mismo, así que quitarlo no cambia el resultado y arregla el script en
   los dos sistemas.
 - **Verificación:** `npm run build` completo en Windows.
+
+## FIX-005 — `sizes` de las capturas de Base Estelar infravaloran el ancho real a 1440 px
+
+- **Estado:** ✅ CERRADO sin aplicar (2026-11-08): ya no aplica. Las capturas de Base Estelar se sustituyeron por la animación y se borraron sus imágenes; `ProjectImages` sigue sirviendo solo la de Iglesia El Camino, que sale nítida.
+- **Dónde:** `src/components/projects-section.tsx`, `ProjectImages` (atributo `sizes`).
+- **Problema:** a 1440 px la captura principal se muestra a ~713 px CSS y la secundaria a ~349 px, pero
+  `sizes` declara 560 px y 280 px. Next sirve el `w=640` (principal) y `w=384` (secundaria), así que el
+  navegador las estira un ~11 % y salen algo blandas. La de Iglesia El Camino (1076 px, `w=1080`) sale
+  nítida. El fichero fuente es de 1154 px, así que hay margen.
+- **Propuesta (no aplicada):** `(min-width: 1024px) 720px` para la principal y `(min-width: 1024px) 360px`
+  para la secundaria.
+- **Verificación:** a 1440 px, `currentSrc` de la principal debe pedir `w>=750`.
+
+## FIX-006 — Estado inicial de la animación de Base Estelar: post-its apilados en la esquina del plano
+
+- **Estado:** ✅ RESUELTO (2026-11-08)
+- **Dónde:** `src/lib/base-estelar-animacion.ts` / `src/components/base-estelar-demo.tsx`.
+- **Problema:** en una captura tomada justo al entrar la sección en pantalla (antes de que el bucle avance), el
+  plano 2D mostraba los post-its de las tareas apilados y minúsculos en la esquina superior izquierda de la
+  sala Frontend, con la pizarra vacía y la terminal solo con la bienvenida. A partir de ~1 s se ve normal. No
+  se repite en los ciclos siguientes. Solo afecta al primer frame al llegar a la sección.
+- **Propuesta (no aplicada):** no pintar los post-its hasta su primer movimiento, u ocultar el plano hasta
+  el primer `iniciar()` (`visibility`/opacidad).
+- **Verificación:** captura a los 0-300 ms tras entrar la sección en viewport.
+- **Causa y arreglo:** los post-its se creaban sin `transform` y solo se colocaban en el primer `reiniciar()` del ciclo, que ocurre tras `iniciar()`; mientras tanto estaban en (0,0). Ahora `crearAnimacion` llama a `reiniciar()` al construirse, así que el primer pintado ya los muestra en su sitio y la `transition` no se dispara (el `transform` inline nace con el elemento).
+
+## FIX-007 — Rendimiento móvil Lighthouse bajo en esta máquina (TBT 580-1350 ms), no atribuible a la demo
+
+- **Estado:** ℹ️ INFORMATIVO (no es fallo de la tarea)
+- **Medición 2026-11-08 (build de producción, móvil, 3 pasadas cada una):** con demo Rend. 67/77/81, A11y
+  100, BP 100, SEO 100, LCP 3.3/1.1/1.1 s, CLS 0.001/0.001/0 . Línea base en la misma máquina sustituyendo la
+  demo por las dos capturas antiguas (copia temporal fuera del repo): Rend. 72/78/85, LCP 3.3/1.0/0.9 s,
+  CLS 0.001. Diferencia ~4-5 puntos, dentro del ruido; la mediana de hoy es inferior a la histórica (90-98) también
+  sin la demo. La primera pasada de cada serie sale peor (LCP 3,3 s, arranque en frío).

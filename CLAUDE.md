@@ -112,7 +112,8 @@ apartado con particularidades propias tiene un fichero **`.claude/docs/<Modulo>/
 (hoy: `Landing`, `Contacto`, `SEO`). Al trabajar en un módulo, tanto el hilo principal como el
 agente correspondiente **deben consultar** ese fichero.
 
-**Jerarquía (no contradecir hacia arriba):** global personal › `CLAUDE.md` › agentes `pweb-*` ›
+**Jerarquía (no contradecir hacia arriba):** `CLAUDE.md`/`AGENTS.md` del proyecto › global personal
+› agentes `pweb-*` ›
 `NotasAgentes.md` de módulo. Un nivel inferior NO puede contradecir a uno superior. Si para una
 tarea hiciera falta algo no cubierto por ningún nivel, o algo que contradice una directriz superior,
 **preguntar antes de actuar**.
