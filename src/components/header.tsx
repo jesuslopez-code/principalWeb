@@ -11,6 +11,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 
 // Las anclas llevan "/" delante para que también funcionen desde otras rutas (404, futuras).
 const navLinks = [
@@ -28,7 +29,7 @@ export function Header() {
       <div className="container mx-auto flex h-14 items-center justify-between px-4 md:px-6">
         <Link
           href="/"
-          className="font-mono text-sm text-foreground transition-colors hover:text-primary"
+          className="font-mono text-sm text-foreground transition-colors hover:text-primary rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <span aria-hidden="true" className="text-primary">&gt;_</span> <span aria-hidden="true">jesús</span>
           <span className="sr-only">Jesús López, inicio</span>
@@ -39,12 +40,16 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-muted-foreground transition-colors hover:text-primary"
+              className="text-muted-foreground transition-colors hover:text-primary rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {link.label}
             </Link>
           ))}
         </nav>
+
+        <div className="hidden md:block">
+          <ThemeToggle />
+        </div>
 
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
@@ -64,13 +69,16 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-muted-foreground transition-colors hover:text-primary"
+                  className="text-muted-foreground transition-colors hover:text-primary rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
+            <div className="mt-8">
+              <ThemeToggle showLabels />
+            </div>
           </SheetContent>
         </Sheet>
       </div>

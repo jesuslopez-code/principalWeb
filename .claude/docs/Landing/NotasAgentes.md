@@ -21,7 +21,7 @@ acabarán compartiéndose con esas rutas.
 - `src/app/page.tsx` — la página. Contiene, por este orden: las constantes `projects` y `skills`, y
   las funciones `HeroSection`, `AboutSection`, `ProjectsSection`, `SkillsSection`, `ContactSection`
   y `Footer`. El export por defecto `Home` las compone dentro de `<main>`.
-- `src/app/layout.tsx` — layout raíz: `<html lang="es" className="dark">`, metadatos, fuentes y
+- `src/app/layout.tsx` — layout raíz: `<html lang="es" suppressHydrationWarning>` (el tema claro/oscuro/sistema lo gestiona `next-themes` con la clase `dark`, vía `ThemeProvider`), metadatos, fuentes y
   `<Toaster />`.
 - `src/components/header.tsx` — cabecera fija con navegación por anclas y menú móvil.
 - `src/lib/placeholder-images.json` + `placeholder-images.ts` — todas las imágenes del sitio.

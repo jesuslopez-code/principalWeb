@@ -4,40 +4,43 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
-    --primary: 182 100% 74%;
-    --primary-foreground: 240 3% 10%;
-    --secondary: 0 0% 96.1%;
-    --secondary-foreground: 0 0% 9%;
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
-    --accent: 0 0% 96.1%;
-    --accent-foreground: 0 0% 9%;
-    --destructive: 0 84.2% 60.2%;
+    --background: 255 45% 97%;
+    --foreground: 245 35% 14%;
+    --card: 255 60% 99%;
+    --card-foreground: 245 35% 14%;
+    --popover: 255 60% 99%;
+    --popover-foreground: 245 35% 14%;
+    --primary: 262 60% 45%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 255 32% 93%;
+    --secondary-foreground: 245 35% 14%;
+    --muted: 255 25% 91%;
+    --muted-foreground: 245 12% 40%;
+    --accent: 255 30% 90%;
+    --accent-foreground: 245 35% 14%;
+    --destructive: 0 72% 42%;
     --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 182 100% 74%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --code-string: 125 30% 28%;
+    --border: 255 22% 85%;
+    --input: 245 10% 52%;
+    --ring: 262 60% 45%;
+    --chart-1: 262 60% 45%;
+    --chart-2: 168 60% 26%;
+    --chart-3: 210 70% 40%;
+    --chart-4: 280 55% 45%;
+    --chart-5: 340 65% 45%;
+    --code-string: 168 60% 26%;
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --hero-grid: 0.08;
+    --hero-halo: 0.14;
+    --shadow-glow: 0.1;
+    --sidebar-background: 255 45% 97%;
+    --sidebar-foreground: 245 35% 14%;
+    --sidebar-primary: 262 60% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 255 30% 90%;
+    --sidebar-accent-foreground: 245 35% 14%;
+    --sidebar-border: 255 22% 85%;
+    --sidebar-ring: 262 60% 45%;
   }
   .dark {
     --background: 232 24% 7%;
@@ -54,10 +57,10 @@
     --muted-foreground: 228 12% 64%;
     --accent: 232 18% 15%;
     --accent-foreground: 228 25% 92%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 84% 68%;
+    --destructive-foreground: 232 30% 8%;
     --border: 232 16% 20%;
-    --input: 232 12% 40%;
+    --input: 232 12% 45%;
     --ring: 258 90% 72%;
     --chart-1: 258 90% 72%;
     --chart-2: 168 50% 55%;
@@ -65,6 +68,9 @@
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 60%;
     --code-string: 168 50% 64%;
+    --hero-grid: 0.07;
+    --hero-halo: 0.16;
+    --shadow-glow: 0.05;
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
     --sidebar-primary: 224.3 76.3% 48%;
@@ -81,8 +87,8 @@
      debe ir en un hijo con z-10 por encima del halo. */
   .hero-bg {
     background-image:
-      linear-gradient(hsl(var(--primary) / 0.07) 1px, transparent 1px),
-      linear-gradient(90deg, hsl(var(--primary) / 0.07) 1px, transparent 1px);
+      linear-gradient(hsl(var(--primary) / var(--hero-grid)) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(var(--primary) / var(--hero-grid)) 1px, transparent 1px);
     background-size: 48px 48px;
   }
 
@@ -91,7 +97,7 @@
     position: absolute;
     inset: -20% 40% 30% -10%;
     pointer-events: none;
-    background: radial-gradient(closest-side, hsl(var(--primary) / 0.16), transparent);
+    background: radial-gradient(closest-side, hsl(var(--primary) / var(--hero-halo)), transparent);
   }
 
   .hero-reveal {
@@ -103,6 +109,10 @@
   .hero-reveal-rise {
     animation: hero-rise 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
     animation-delay: var(--delay, 0s);
+  }
+
+  .shadow-glow {
+    box-shadow: 0 25px 50px -12px hsl(var(--primary) / var(--shadow-glow));
   }
 
   .cursor-blink {
@@ -149,6 +159,9 @@
 }
 
 @layer base {
+  html {
+    scroll-padding-top: 4rem;
+  }
   * {
     @apply border-border;
   }

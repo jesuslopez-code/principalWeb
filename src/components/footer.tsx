@@ -1,4 +1,5 @@
 import { Github, Linkedin, Mail } from "lucide-react";
+import { VerIntroButton } from "@/components/ver-intro-button";
 import { SITE_LINKS, SITE_NAME } from "@/lib/site";
 
 export function Footer() {
@@ -9,9 +10,10 @@ export function Footer() {
           <p className="font-mono text-xs text-muted-foreground">
             hecho con Next.js · desplegado en Vercel
           </p>
-          <p className="text-sm text-foreground/60">
+          <p className="text-sm text-muted-foreground">
             &copy; {new Date().getFullYear()} {SITE_NAME}. Todos los derechos reservados.
           </p>
+          <VerIntroButton />
         </div>
         <div className="flex items-center gap-4 text-muted-foreground">
           <a
@@ -19,7 +21,7 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="GitHub"
-            className="transition-colors hover:text-primary"
+            className="transition-colors hover:text-primary rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Github className="h-5 w-5" />
           </a>
@@ -28,14 +30,14 @@ export function Footer() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="transition-colors hover:text-primary"
+            className="transition-colors hover:text-primary rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Linkedin className="h-5 w-5" />
           </a>
           <a
             href={`mailto:${SITE_LINKS.email}`}
             aria-label="Enviar un correo"
-            className="transition-colors hover:text-primary"
+            className="transition-colors hover:text-primary rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Mail className="h-5 w-5" />
           </a>

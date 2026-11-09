@@ -36,7 +36,7 @@ export function CopyEmail({ email }: CopyEmailProps) {
     <div className="flex flex-wrap items-center gap-3">
       <a
         href={`mailto:${email}`}
-        className="font-mono text-base text-foreground underline-offset-4 transition-colors hover:text-primary hover:underline sm:text-lg"
+        className="font-mono text-base text-foreground underline-offset-4 transition-colors hover:text-primary hover:underline sm:text-lg rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         {email}
       </a>

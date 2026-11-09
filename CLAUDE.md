@@ -154,6 +154,21 @@ borradas, primitivas shadcn sin usar retiradas, y la red de seguridad del build 
 - Ante un fallo reportado tras un cambio, verificar primero que el servidor de desarrollo recargó y
   está sirviendo el código nuevo, antes de diagnosticar el síntoma.
 
+## Cierre de fase y archivo de fixes
+
+- **Cerrar la fase en `tareas.md`.** En cuanto todas sus casillas estén `[x]` y haya pasado la
+  revisión, pon `**Estado:** hecho` en la fase (si falta que Jesús la valide:
+  `hecho (pendiente de validar)`) y la misma marca en su fila de `plan-implementacion.md`. Sin ese
+  cambio la fase sigue «en curso» y sus tareas no salen de la pizarra del panel. Al empezar una fase
+  nueva, si la anterior tiene todo `[x]` y no está cerrada, ciérrala primero. Si quedan tareas que no
+  se van a hacer ahora, pon `en pausa` y explica por qué en el relevo.
+- **Archivar los fixes resueltos.** Al cerrar una fase o un módulo (y cuando Jesús lo pida), mueve
+  cada entrada `✅ ARREGLADA` de `fixes.md` al final de `fixes-archivo.md`, en la misma carpeta
+  (créalo con el título `# Correcciones archivadas` si no existe), sin cambiar su texto y añadiendo
+  `- **Archivada:** <AAAA-MM-DD>`. En `fixes.md` quedan solo las 🔧 y las ⏳. Los números no se
+  reutilizan: el siguiente FIX sigue al más alto de los dos ficheros. Mover no es borrar: ninguna
+  entrada se pierde.
+
 ## Registrar correcciones del usuario
 
 Cuando Jesús corrija algo, registrarlo en el momento:

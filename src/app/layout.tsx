@@ -1,7 +1,10 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Sans, Instrument_Serif, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
+import { IntroTelon } from "@/components/intro-telon";
+import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { introTelonScript } from "@/lib/intro-telon-script";
 import {
   SITE_DESCRIPTION,
   SITE_LINKS,
@@ -31,6 +34,15 @@ const fontMono = JetBrains_Mono({
   display: "swap",
   variable: "--font-mono",
 });
+
+// Mismos hex que --background de :root (#f6f4fb) y de .dark (#0e0f16) (ver NotasAgentes.md). La
+// media query sigue al sistema, no a la elección manual del conmutador: es una limitación del navegador.
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f6f4fb" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e0f16" },
+  ],
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -74,6 +86,12 @@ const personJsonLd = {
   sameAs: [SITE_LINKS.linkedin, SITE_LINKS.github],
 };
 
+// El script de next-themes se emite dentro de <body>: con red lenta el navegador puede pintar un
+// fotograma con el tema por defecto (claro) antes de que llegue. Este, en <head>, corre antes de que
+// exista el body. Replica su lógica (clave "theme", clase en <html>, defecto "system"); si se cambia
+// allí, cambiarlo aquí.
+const themeInitScript = `(function(){try{var s=localStorage.getItem("theme"),d=document.documentElement,t=s==="light"||s==="dark"?s:matchMedia("(prefers-color-scheme: dark)").matches?"dark":"light";d.classList.remove("light","dark");d.classList.add(t);d.style.colorScheme=t}catch(e){}})()`;
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -82,17 +100,31 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`dark scroll-smooth ${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}
+      suppressHydrationWarning
+      className={`scroll-smooth ${fontDisplay.variable} ${fontBody.variable} ${fontMono.variable}`}
     >
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+        <script dangerouslySetInnerHTML={{ __html: introTelonScript }} />
+      </head>
       <body className="font-body antialiased">
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
-          }}
-        />
-        {children}
-        <Toaster />
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <a
+            href="#contenido"
+            className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-sm focus:font-medium focus:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background"
+          >
+            Saltar al contenido
+          </a>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(personJsonLd).replace(/</g, "\\u003c"),
+            }}
+          />
+          {children}
+          <Toaster />
+          <IntroTelon />
+        </ThemeProvider>
       </body>
     </html>
   );

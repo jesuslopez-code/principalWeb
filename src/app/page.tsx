@@ -122,7 +122,7 @@ function HeroSection() {
             </Button>
             <Link
               href="#contact"
-              className="text-foreground/80 underline-offset-4 transition-colors hover:text-primary hover:underline"
+              className="text-foreground/80 underline-offset-4 transition-colors hover:text-primary hover:underline rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               Contactar
             </Link>
@@ -132,7 +132,7 @@ function HeroSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
-                className="transition-colors hover:text-primary"
+                className="transition-colors hover:text-primary rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Github className="h-5 w-5" />
               </a>
@@ -141,7 +141,7 @@ function HeroSection() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
-                className="transition-colors hover:text-primary"
+                className="transition-colors hover:text-primary rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Linkedin className="h-5 w-5" />
               </a>
@@ -151,7 +151,7 @@ function HeroSection() {
 
         <div
           aria-hidden="true"
-          className="hero-reveal overflow-hidden rounded-lg border border-border bg-card shadow-2xl shadow-primary/5"
+          className="hero-reveal overflow-hidden rounded-lg border border-border bg-card shadow-glow"
           style={{ "--delay": "0.4s" } as CSSProperties}
         >
           <div className="flex items-center gap-2 border-b border-border bg-secondary px-4 py-3">
@@ -160,7 +160,7 @@ function HeroSection() {
             <span className="h-2.5 w-2.5 rounded-full bg-primary/70" />
             <span className="ml-3 font-mono text-xs text-muted-foreground">Developer.cs</span>
           </div>
-          <pre className="overflow-x-auto p-5 font-mono text-xs leading-relaxed text-foreground/90 sm:text-sm">
+          <pre tabIndex={-1} className="overflow-x-auto p-5 font-mono text-xs leading-relaxed text-foreground/90 sm:text-sm">
             <code>
               <span className="text-primary">public record</span> Developer({"\n"}
               {"    "}
@@ -198,10 +198,6 @@ function AboutSection() {
                   fill
                   sizes="(min-width: 1024px) 224px, 176px"
                   className="object-cover grayscale"
-                />
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 bg-primary/30 mix-blend-multiply"
                 />
               </div>
             )}
@@ -291,7 +287,7 @@ function ContactSection() {
                 href={SITE_LINKS.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-foreground/80 underline-offset-4 transition-colors hover:text-primary hover:underline"
+                className="inline-flex items-center gap-2 text-foreground/80 underline-offset-4 transition-colors hover:text-primary hover:underline rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Linkedin className="h-4 w-4" />
                 LinkedIn
@@ -300,7 +296,7 @@ function ContactSection() {
                 href={SITE_LINKS.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-foreground/80 underline-offset-4 transition-colors hover:text-primary hover:underline"
+                className="inline-flex items-center gap-2 text-foreground/80 underline-offset-4 transition-colors hover:text-primary hover:underline rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Github className="h-4 w-4" />
                 GitHub
@@ -325,7 +321,7 @@ export default function Home() {
   return (
     <div className="flex min-h-dvh w-full flex-col">
       <Header />
-      <main className="flex-1">
+      <main id="contenido" className="flex-1">
         <HeroSection />
         <AboutSection />
         <ProjectsSection />

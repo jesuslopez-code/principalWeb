@@ -90,7 +90,7 @@ const projects: Project[] = [
 ];
 
 const linkClass =
-  "inline-flex items-center gap-2 text-foreground/80 underline-offset-4 transition-colors hover:text-primary hover:underline";
+  "inline-flex items-center gap-2 text-foreground/80 underline-offset-4 transition-colors hover:text-primary hover:underline rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
 function ProjectImages({ ids }: { ids: string[] }) {
   return (

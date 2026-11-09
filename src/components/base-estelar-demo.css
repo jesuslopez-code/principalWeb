@@ -263,7 +263,7 @@
     --claude: #d77757;
   }
 
-  .base-estelar-demo { margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 12px; border: 1px solid hsl(var(--border)); border-radius: 8px; background: var(--kp-color-fondo); }
+  .base-estelar-demo { margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 12px; border: 1px solid hsl(var(--border)); border-radius: 8px; background: var(--kp-color-fondo); color: var(--kp-color-texto); }
   @media (min-width: 900px) { .base-estelar-demo { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
 
   /* Panel de terminal (terminal.css) */
