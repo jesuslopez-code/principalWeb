@@ -1,4 +1,9 @@
+import { getCaseStudies } from "@/lib/projects";
+
 export const SITE_URL = "https://jesuslopezweb.com";
+
+// Identificador del nodo Person del JSON-LD: las fichas lo referencian como autor.
+export const PERSON_ID = `${SITE_URL}/#person`;
 
 export const SITE_NAME = "Jesús López";
 
@@ -15,7 +20,9 @@ export const SITE_LINKS = {
 
 export const SITE_AVAILABLE = true;
 
-// Rutas indexables; añadir aquí /proyectos, /blog... cuando existan.
+// Rutas indexables: home, listado y fichas (derivadas de los datos). Añadir /blog... aquí.
 export const SITE_ROUTES: { path: string; priority: number }[] = [
   { path: "/", priority: 1 },
+  { path: "/proyectos", priority: 0.8 },
+  ...getCaseStudies().map((project) => ({ path: `/proyectos/${project.slug}`, priority: 0.7 })),
 ];

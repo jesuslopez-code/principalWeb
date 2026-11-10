@@ -1,0 +1,23 @@
+<Panel n="01" title="Problema">
+
+Al trabajar con un orquestador y varios subagentes, la información quedaba repartida: cada agente en su terminal, el estado de las fases en ficheros Markdown, las maquetas en una carpeta y los permisos esperando respuesta en otra ventana. No había una forma gráfica de ver de un vistazo quién estaba trabajando, quién esperaba una respuesta y quién estaba libre, ni un único sitio desde el que actuar.
+
+</Panel>
+
+<Panel n="02" title="Arquitectura">
+
+Todo vive en una sola aplicación instalable. Los agentes trabajan en el proyecto con normalidad; la app vigila los ficheros donde dejan su estado y lo envía en tiempo real a la escena 3D y al panel. Las terminales de los agentes se abren dentro de la propia app, así que no hay herramientas sueltas que arrancar por separado.
+
+<Diagram />
+
+</Panel>
+
+<Decisions n="03" />
+
+<Panel n="04" title="Resultados">
+
+<Metrics />
+
+Desarrollada a lo largo de 2026, va por la versión 1.7.0 y se actualiza sola desde GitHub Releases. Hoy es la herramienta con la que trabajo a diario: con ella se ha construido y revisado esta web, fase a fase.
+
+</Panel>

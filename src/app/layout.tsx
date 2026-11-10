@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { introTelonScript } from "@/lib/intro-telon-script";
 import {
+  PERSON_ID,
   SITE_DESCRIPTION,
   SITE_LINKS,
   SITE_NAME,
@@ -77,6 +78,7 @@ export const metadata: Metadata = {
 const personJsonLd = {
   "@context": "https://schema.org",
   "@type": "Person",
+  "@id": PERSON_ID,
   name: SITE_NAME,
   url: SITE_URL,
   jobTitle: "Desarrollador Web Full-Stack",

@@ -388,3 +388,9 @@
 .base-estelar-demo .pausa-btn { border: 1px solid var(--kp-color-borde-fuerte); border-radius: 8px; background: var(--kp-color-superficie); }
 .base-estelar-demo .pausa-btn[aria-pressed="true"] { background: var(--kp-terminal-pestana-activa-fondo); color: #fff; }
 .base-estelar-demo .vista-marco { position: relative; }
+
+/* Variante de tarjeta: solo el visor (plano/3D), sin el panel de terminal, para que quepa en una columna estrecha. */
+.base-estelar-demo.base-estelar-demo--compacta { margin-top: 0; grid-template-columns: minmax(0, 1fr); border: 0; border-radius: 0; }
+.base-estelar-demo--compacta .panel-terminal { display: none; }
+/* En la tarjeta la escena (vertical) se recorta al 16/10 de las otras visuales: "slice" en el SVG la centra sin deformarla. */
+.base-estelar-demo--compacta .vista { aspect-ratio: 16 / 10; overflow: hidden; border-radius: 8px; }

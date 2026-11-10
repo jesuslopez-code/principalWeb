@@ -34,10 +34,10 @@ lo demás; después llega el crecimiento de contenido y la capa visual.
 | 3 | SEO base | Metadatos completos, `robots.ts`, `sitemap.ts` y JSON-LD | hecho |
 | 3B | Rediseño visual | Aplicar la dirección A, «Terminal editorial», a toda la home | hecho |
 | 4 | Rendimiento y accesibilidad | Fuentes, imágenes y semántica al nivel que exigen los Core Web Vitals | hecho |
-| 5 | Casos de estudio | Ruta `/proyectos` y `/proyectos/[slug]` con fichas de proyecto reales | pendiente |
+| 5 | Casos de estudio | Ruta `/proyectos` y `/proyectos/[slug]` con fichas de proyecto reales | hecho (pendiente de validar) |
 | 6 | Blog MDX | Ruta `/blog` con artículos en MDX | pendiente |
-| 7 | Tema claro/oscuro | Conmutador de tema aprovechando los tokens claros ya definidos | hecho (pendiente de validar) |
-| 8 | Animaciones | Transiciones y microinteracciones sin penalizar rendimiento | hecho (pendiente de validar; solo el telón, el resto sin decidir) |
+| 7 | Tema claro/oscuro | Conmutador de tema aprovechando los tokens claros ya definidos | hecho |
+| 8 | Animaciones | Transiciones y microinteracciones sin penalizar rendimiento | hecho (solo el telón; el resto sin decidir) |
 
 Las fases 1 a 4 son el alcance de la rama actual `limpieza-y-seo`. De la 5 en adelante son el
 crecimiento previsto: están anotadas para no perderlas de vista, **sin desarrollar todavía**; su

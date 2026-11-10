@@ -147,3 +147,27 @@
   documento previo a la navegación (fondo del navegador `#121212` o blanco de `about:blank`, 0-17 ms), fuera del
   control del sitio. Evidencia: `C:\Users\1992j\qa-fase8\shots\b-*.png`; script `C:\Users\1992j\qa-fase8\b.mjs`.
 - **Archivada:** 2026-11-09
+
+## FIX-012 — `/proyectos` sin `og:image:alt` ni `twitter:image:alt` propios
+
+- **Estado:** ✅ ARREGLADA — `/proyectos` pasa `images` con `alt` propio («Casos de estudio de Jesús López», 1200×630) en `src/app/proyectos/page.tsx`.
+- **Responsable:** `pweb-seo`
+- **Dónde:** `src/lib/seo.ts` (`pageMetadata`) y `src/app/proyectos/page.tsx`.
+- **Problema:** en el HTML servido de `/proyectos` hay `og:image` y `twitter:image`
+  (`/opengraph-image`) pero ninguna etiqueta `*:image:alt`; las fichas sí llevan alt propio
+  («Base Estelar: caso de estudio»). Criterio de la fase: imagen y alt propios en listado y fichas.
+- **Encontrado por:** `pweb-tester` (2026-11-10, build de producción en :3100).
+- **Archivada:** 2026-11-10
+
+## FIX-013 — Sin separación entre el párrafo de Arquitectura y el diagrama de flujo
+
+- **Estado:** ✅ ARREGLADA
+- **Responsable:** `pweb-frontend-dev`
+- **Dónde:** `src/components/case-study.tsx` / `src/components/project-flow.tsx` (diagrama dentro del
+  panel 02 de las fichas).
+- **Problema:** a 768 y 1440 px el diagrama queda pegado (≈10 px) a la última línea del párrafo,
+  mientras que el resto de bloques del panel respiran más. En 375 px se ve bien.
+- **Arreglo:** `Diagram` en `src/app/proyectos/[slug]/page.tsx` envuelve `ProjectFlow` en `mt-3` (suma al `mb-3` del párrafo: 24 px); `ProjectFlow` no se toca, así que las tarjetas no cambian.
+- **Encontrado por:** `pweb-tester` (2026-11-10). Capturas en `C:\Users\1992j\qa-fase5\s\shots\`
+  (`dev-dark-1440-base-estelar.png`, `dev-dark-768-kit-multiagente.png`).
+- **Archivada:** 2026-11-10

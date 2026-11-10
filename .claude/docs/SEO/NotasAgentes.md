@@ -110,3 +110,18 @@ estos tres a mano.
   (claro). `--force-prefers-color-scheme` NO funciona en Chrome 156 headless.
 - Contraste claro medido y Lighthouse A11y 100 en ambos temas (detalle en `tareas.md`, Fase 7). Salvedad:
   `text-destructive` en oscuro 1,6-1,9:1 (pendiente de `pweb-frontend-dev`).
+
+## Fase 5 (casos de estudio)
+
+- **`openGraph` y `twitter` por ruta sustituyen a los del layout** (no se fusionan) y, si no llevan
+  `images`, la ruta pierde la imagen del `opengraph-image` heredado. Por eso existe `pageMetadata` en
+  `src/lib/seo.ts`: repite siteName/locale/type y acepta `images`. Toda ruta nueva (blog...) debe usarlo.
+- `<title>` aplica la plantilla `%s | Jesús López`; en OG y Twitter el título va ya completo.
+- Fichas: `opengraph-image.tsx` en `proyectos/[slug]/` con `generateStaticParams` (sin él la ruta es
+  dinámica). `generateImageMetadata` en Next 15.5 hizo desaparecer las metaetiquetas de imagen: el alt por
+  ficha se declara en `projectMetadata` con `images` explícito apuntando a `/proyectos/<slug>/opengraph-image`.
+- JSON-LD: `Person` del layout con `@id` (`PERSON_ID` en `site.ts`); fichas y listado la referencian como
+  `author` y llevan `BreadcrumbList`. Tipos por ficha en `Project.schemaType`, descripciones en
+  `Project.metaDescription`, versión en `Project.version`. Componente `JsonLd` escapa `<`.
+- `SITE_ROUTES` deriva de `getCaseStudies()`: una ficha nueva en `projects.ts` entra sola en el sitemap.
+- En Windows, matar un `next start` con `taskkill` por PID de `netstat` (no hay `pkill`).
