@@ -28,7 +28,7 @@ function cargarBundle3D(): Promise<void> {
   return cargaBundle;
 }
 
-export function BaseEstelarDemo() {
+export function BaseEstelarDemo({ compact = false }: { compact?: boolean }) {
   const raizRef = useRef<HTMLDivElement>(null);
   const planoRef = useRef<SVGSVGElement>(null);
   const logRef = useRef<HTMLDivElement>(null);
@@ -102,7 +102,7 @@ export function BaseEstelarDemo() {
 
   return (
     <figure className="m-0">
-      <div ref={raizRef} className="base-estelar-demo">
+      <div ref={raizRef} className={`base-estelar-demo${compact ? " base-estelar-demo--compacta" : ""}`}>
         <div className="panel-terminal" aria-hidden="true">
           <div className="barra">
             <span className="pestana pestana--activa">
@@ -152,6 +152,7 @@ export function BaseEstelarDemo() {
               ref={planoRef}
               className="oficina__plano"
               viewBox="0 0 680 752"
+              preserveAspectRatio={compact ? "xMidYMid slice" : undefined}
               aria-hidden="true"
               style={vista === "2d" ? undefined : { display: "none" }}
             />
@@ -169,7 +170,7 @@ export function BaseEstelarDemo() {
           </div>
         </div>
       </div>
-      <figcaption className="mt-2.5 font-mono text-xs text-muted-foreground">
+      <figcaption className={`mt-2.5 font-mono text-xs text-muted-foreground${compact ? " sr-only" : ""}`}>
         animación decorativa · se queda quieta con «reducir movimiento»
       </figcaption>
     </figure>

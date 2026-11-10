@@ -16,7 +16,7 @@ import { ThemeToggle } from "@/components/theme-toggle";
 // Las anclas llevan "/" delante para que también funcionen desde otras rutas (404, futuras).
 const navLinks = [
   { href: "/#about", label: "01. sobre mí" },
-  { href: "/#projects", label: "02. proyectos" },
+  { href: "/proyectos", label: "02. proyectos" },
   { href: "/#skills", label: "03. habilidades" },
   { href: "/#contact", label: "04. contacto" },
 ];

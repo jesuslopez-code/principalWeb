@@ -35,7 +35,7 @@ Tareas:
 - [x] Limpiar de `src/lib/placeholder-images.json` las entradas `project-*` sin uso: ya no queda
       ninguna referencia en `src/`.
 - [x] Revisar las imágenes huérfanas de `public/images/` y reportarlas a Jesús. Resultado: la única
-      sin usar es `2025-10-07 175434.png`. **Pendiente de que Jesús decida si la borra.**
+      sin usar es `2025-10-07 175434.png`. Borrada en el commit de las Fases 4, 7 y 8.
 - [x] Reescribir `README.md` con el proyecto real: qué es, stack, cómo levantarlo (`npm run dev` en
       el puerto 9002) y cómo se despliega.
 - [x] Cierre de la fase (parar y validar). Revisión con `pweb-reviewer` omitida por
@@ -407,7 +407,7 @@ Tareas:
   recarga; sin destello del tema contrario al cargar (ni con caché vacía); sin error de hidratación en
   consola; contraste AA de texto y foco en ambos temas; Lighthouse Accesibilidad 100 en los dos;
   typecheck, lint y build en verde.
-- **Dependencias:** Fase 4. **Estado:** hecho (pendiente de validar).
+- **Dependencias:** Fase 4. **Estado:** hecho (validada y publicada el 2026-11-10, PR #6).
 - **Responsable IA:** Claude · agentes `pweb-frontend-dev` y `pweb-seo` · modelo Sonnet.
 - **Notas / riesgos:** la paleta clara que hay hoy en `:root` es la neutra de shadcn con el primario
   cian antiguo (`182 100% 74%`), que no pega con la dirección A y no da contraste sobre blanco: hay que
@@ -527,7 +527,7 @@ Tareas:
   consola; el telón es `aria-hidden` y no atrapa el foco; Lighthouse sin pérdida respecto a la Fase 7
   (Rend., A11y 100, LCP y CLS); typecheck, lint y build en verde; bien entre 375 y 1440 px y en los dos
   temas.
-- **Dependencias:** Fase 4. La Fase 7 queda en pausa a falta de validar FIX-010. **Estado:** hecho (pendiente de validar).
+- **Dependencias:** Fase 4. La Fase 7 queda en pausa a falta de validar FIX-010. **Estado:** hecho (validada y publicada el 2026-11-10, PR #6).
 - **Responsable IA:** Claude · agentes `pweb-frontend-dev` y `pweb-seo` · modelo Sonnet.
 - **Notas / riesgos:** el telón cubre la web; si su texto es el mayor elemento pintado puede pasar a ser
   el LCP. La maqueta E original dejaba al muñeco fuera de la ventana; la C ya lo corrige.
@@ -640,17 +640,121 @@ Tareas:
     Lighthouse con la máquina en reposo (cierra FIX-011 y el criterio «sin pérdida frente a la Fase 7»).
 - [x] Cierre de la fase (parar y validar). Cerrada el 2026-11-09; falta la validación visual de Jesús en producción.
 
+## Fase 5 — Casos de estudio
+
+- **Objetivo:** que cada proyecto principal tenga su propia ficha en `/proyectos/[slug]`, con un
+  listado en `/proyectos`, contando problema, arquitectura, decisiones y resultados.
+- **Alcance:** datos de proyectos extraídos a `src/lib/projects.ts`; infraestructura MDX para el
+  texto largo (reutilizable por la Fase 6); rutas `/proyectos` y `/proyectos/[slug]` con la dirección
+  B «Expediente técnico»; fichas de Base Estelar, Kit multiagente e Iglesia El Camino; sección
+  Proyectos de la home condensada a tarjetas que enlazan a las fichas; enlace del header a
+  `/proyectos`; metadatos por ruta, JSON-LD y sitemap.
+  **Fuera de alcance:** filtros del listado (con tres fichas no aportan; se retoman cuando haya más
+  proyectos), ficha propia de la API de Productos y Clientes (queda como enlace al repositorio),
+  blog (Fase 6), animaciones de entrada de sección (Fase 8, resto), capturas nuevas.
+- **Entregables:** `src/lib/projects.ts`; `src/content/proyectos/<slug>.mdx` ×3; `src/app/proyectos/page.tsx`;
+  `src/app/proyectos/[slug]/page.tsx`; componentes de tarjeta y de ficha; home y header actualizados;
+  `generateMetadata`, JSON-LD y entradas en `sitemap.ts`.
+- **Criterios de aceptación:** `/proyectos` y las tres fichas se generan estáticas y un slug
+  inexistente da 404; la home enlaza a cada ficha y a `/proyectos`; la animación de Base Estelar se ve
+  en pequeño en su tarjeta y en grande en la cabecera de su ficha; las fichas siguen la maqueta B
+  (ficha técnica fija en escritorio, paneles numerados, tabla de decisiones legible en 375 px); cada
+  ruta tiene title, description, canonical y OpenGraph propios y aparece en el sitemap; ambos temas
+  correctos; sin `"use client"` nuevo salvo necesidad justificada; typecheck, lint y build en verde.
+- **Dependencias:** Fase 4. **Estado:** hecho (pendiente de validar).
+- **Responsable IA:** Claude · agentes `pweb-frontend-dev` y `pweb-seo` · modelo Sonnet.
+- **Notas / riesgos:** la demo de Base Estelar es un componente cliente con vista 3D bajo demanda
+  (~650 KB); en la tarjeta no debe disparar esa carga. La home deja de llevar el detalle técnico, que
+  pasa a la ficha: revisar que no queden anclas ni enlaces apuntando a contenido retirado.
+
+Tareas:
+- [x] Decisiones previas (Jesús, 2026-11-10): dirección **B «Expediente técnico»**
+      (`.base-estelar/maquetas/t1-bef069/B-expediente-tecnico.html`); datos en TypeScript y texto
+      largo en MDX; listado sin filtros por ahora; animación de Base Estelar en pequeño en la tarjeta
+      (como está desplegada) y en grande en la ficha; Iglesia El Camino con la captura existente
+      (`public/proyectos/iglesia-el-camino.png`); textos de las fichas propuestos por el hilo principal
+      y aprobados por Jesús (el de la iglesia parte del README de `iglesia-barbate`). Fechas: Iglesia
+      en producción desde noviembre de 2025 con actualizaciones posteriores; Kit multiagente y Base
+      Estelar desarrollados a lo largo de 2026.
+- [x] Datos en `src/lib/projects.ts`, infraestructura MDX y contenido de las tres fichas —
+      `pweb-frontend-dev`. Relevo (Claude, Sonnet): `src/lib/projects.ts` (tipo `Project` ampliado, 4
+      proyectos, helpers `getProjects`/`getCaseStudies`/`getProjectBySlug`/`getNextProject`/
+      `getSideProjects`); `src/content/proyectos/{base-estelar,kit-multiagente,iglesia-el-camino}.mdx` +
+      `index.ts` (mapa slug → MDX por import estático); `src/mdx-components.tsx`; `next.config.ts`
+      (`withMDX` + `pageExtensions` con mdx). Dependencias: `@next/mdx` 15.5.23, `@mdx-js/loader`,
+      `@mdx-js/react`, `@types/mdx`. Decisión: el MDX lleva solo la prosa (Problema, Arquitectura,
+      Resultados) dentro de `<Panel n title>`; `<Diagram />`, `<Decisions n />` y `<Metrics />` son
+      componentes que la página inyecta por `components` con los datos TS del proyecto. Fase 6 puede
+      reutilizar `mdx-components.tsx` y la config. Importante: `pageExtensions` debe incluir `mdx`
+      aunque no haya páginas .mdx; si no, Next no aplica sus alias de React al MDX (usa el React 18 de
+      node_modules) y el prerender falla con `ReactCurrentOwner`. Textos aprobados tal cual; "Separar
+      `pages/`…" sin backticks en la tabla. Comprobado: typecheck, lint (solo el aviso de
+      `actionTypes`) y build en verde.
+- [x] Rutas `/proyectos` y `/proyectos/[slug]` (dirección B), home condensada y header —
+      `pweb-frontend-dev`. Relevo (Claude, Sonnet): `src/app/proyectos/page.tsx`,
+      `src/app/proyectos/[slug]/page.tsx` (`generateStaticParams` + `dynamicParams = false`; slug
+      inexistente da 404, comprobado con `next start`), componentes `project-card.tsx`
+      (`ProjectCard`, `SideProjectRow`), `project-flow.tsx`, `case-study.tsx` (`Panel`, `SpecSheet`,
+      `DecisionsPanel`, `MetricsList`); `projects-section.tsx` reescrito (tarjetas + «ver todos los
+      casos →» + fila de la API, `id="projects"` y SectionHeading 02 intactos); `header.tsx`: «02.
+      proyectos» → `/proyectos`. El botón «Ver mis proyectos» del hero sigue en `#projects` (la
+      sección sigue existiendo en la home). Demo en tarjeta: `BaseEstelarDemo` ganó prop `compact`
+      (clase `base-estelar-demo--compacta`: solo visor, sin panel de terminal, para columna estrecha);
+      el bundle 3D ya solo se pide al pulsar «Estación 3D», así que la tarjeta no lo carga; la demo
+      va fuera del `Link` de la tarjeta (tiene botones propios). En la ficha, demo completa. Sin
+      `"use client"` nuevo. Pendiente: no he verificado visualmente en navegador (375–1440 px, claro y
+      oscuro); solo typecheck/lint/build y comprobación HTTP. La ficha no lleva panel «Capturas»
+      (no hay capturas; fuera de alcance). `metadata`/`generateMetadata` son mínimos (title +
+      description) para que `pweb-seo` los complete; sitemap y `SITE_ROUTES` sin tocar.
+      Correcciones de la revisión: fases del Kit (8, con «estos casos de estudio»); sr-only en `SideProjectRow`; `a` de MDX bifurca interno (`next/link`) / externo; `version?` en `Project` (Base Estelar 1.7.0); demo compacta a 16/10 con `preserveAspectRatio="xMidYMid slice"` en el SVG y `.vista` con `aspect-ratio: 16/10` solo en `--compacta`.
+- [x] Metadatos por ruta, JSON-LD de las fichas y sitemap — `pweb-seo`. Relevo (Claude, Sonnet):
+      `src/lib/seo.ts` (nuevo: `pageMetadata`, `projectMetadata`, `projectJsonLd`, `projectsIndexJsonLd`),
+      `src/components/json-ld.tsx` (nuevo), `src/app/proyectos/[slug]/opengraph-image.tsx` (nuevo, mismo
+      estilo que la OG principal, estática por `generateStaticParams`), `proyectos/page.tsx` y
+      `[slug]/page.tsx` (metadatos + JSON-LD; migas convertidas en `<nav aria-label="Migas de pan"><ol>`
+      con `aria-current`, único ajuste semántico), `src/lib/site.ts` (`PERSON_ID`; `SITE_ROUTES` derivado de
+      `getCaseStudies()`), `src/app/layout.tsx` (`@id` en la Person), `src/lib/projects.ts` (campos
+      opcionales `metaDescription` y `schemaType`). Decisiones: title de ficha «X: caso de estudio» (la
+      plantilla añade «| Jesús López»); un `openGraph`/`twitter` de ruta sustituye al del layout, por eso
+      `pageMetadata` repite los campos comunes y `/proyectos` pasa `images: ["/opengraph-image"]` (sin eso
+      perdía la imagen); JSON-LD: Base Estelar `SoftwareApplication`, Kit `CreativeWork`, Iglesia `WebSite`
+      (url de icelcamino.com), autor por `@id` de la Person, `BreadcrumbList`; `/proyectos` `CollectionPage` +
+      `ItemList`. Sin fechas ni datos inventados. Comprobado en HTML servido (`next start`): title, description,
+      canonical, OG y Twitter con imagen por ficha, JSON-LD, sitemap con 5 URL, slug inexistente 404, home sin
+      regresión (canonical, OG, Person); typecheck y build en verde, lint solo el aviso de `actionTypes`.
+      Pendiente: validar JSON-LD en validator.schema.org / Rich Results (sin red desde aquí). Para
+      `pweb-frontend-dev` (sin tocar): `SideProjectRow` abre pestaña nueva sin aviso `sr-only`; `og:image:alt`
+      es genérico («Caso de estudio de Jesús López»). **Arreglos de revisión:** alt por ficha vía `images` en
+      `projectMetadata` (generateImageMetadata rompía las metaetiquetas); `softwareVersion` desde `project.version`;
+      notas del módulo SEO al día. Typecheck, lint (solo `actionTypes`) y build en verde.
+- [x] Notas del módulo en `.claude/docs/CasosDeEstudio/NotasAgentes.md` y `modulos.md` al día.
+      Relevo (hilo principal): creado `NotasAgentes.md` del módulo; `modulos.md` lo pasa a «Lo que ya
+      existe» en 🔧.
+- [x] Revisión — `pweb-reviewer`. Relevo (Claude, Sonnet): sin bloqueantes. typecheck verde; lint solo el aviso de `actionTypes`; build verde (16 páginas, 3 fichas SSG + 3 OG). Importante: métricas del Kit multiagente en `projects.ts` («8 fases», «6 pull requests») y su prosa «publicadas» no cuadran con el repo (7 fases hechas listadas, Fase 5 sin publicar, 5 merges en main): confirmar con Jesús. Menores: `SideProjectRow` sin aviso `sr-only` de pestaña nueva, `og:image:alt` genérico, `a` de `mdx-components.tsx` fuerza `_blank` también a internos (latente para el blog), `softwareVersion` derivado de `status`. Sin verificar en navegador (alto de la demo compacta en tarjeta).
+      Hallazgos resueltos (hilo principal, 2026-11-10): cifras del Kit cuadradas con el estado tras publicar
+      esta fase (8 fases contando casos de estudio, 6 PR); `sr-only` en `SideProjectRow`; `a` del MDX
+      bifurca internos/externos; `version` propio para `softwareVersion`; alt de OG por ficha; demo
+      compacta a 16/10 con `slice`. Queda la verificación visual.
+- [x] Pruebas (preguntar a Jesús antes de lanzar `pweb-tester`). Jesús pide lanzar `pweb-tester` (2026-11-10).
+      Relevo (Claude, Sonnet, `pweb-tester`, 2026-11-10): typecheck verde; lint solo `actionTypes`; build verde (copia en
+      `C:\Users\1992j\qa-fase5\app`, servidor :3100 ya parado). Navegador 375/768/1440 × claro/oscuro: sin errores de
+      consola, sin desbordes, cuadrícula 1/2/3, bundle 3D solo al pulsar «Estación 3D», header/anclas/menú móvil, 404 y
+      paginador OK. HTML, JSON-LD, sitemap (5 URL) y OG 200 image/png OK. Lighthouse móvil 85-100 (home 85-92, listado
+      95-99, ficha 94-96), escritorio 99-100; A11y/BP/SEO 100. Abiertos: FIX-012 (`og:image:alt` en /proyectos,
+      `pweb-seo`) y FIX-013 (espaciado del diagrama, menor, `pweb-frontend-dev`); por eso sigue en [~].
+- [x] Cierre de la fase (parar y validar). Cerrada el 2026-11-10 tras corregir FIX-012 y FIX-013
+      (archivados); falta la validación de Jesús. El 500 visto en el dev server tras las correcciones era
+      un worker de Next colgado (`Jest worker encountered 2 child process exceptions`): al reiniciar
+      `next dev`, las cuatro rutas dan 200 y el slug inexistente 404.
+- [x] Limpieza antes de publicar (hilo principal, 2026-11-10, a petición de Jesús): borrados
+      `src/components/ui/avatar.tsx`, `src/components/ui/badge.tsx` y `src/hooks/use-mobile.tsx`, sin
+      ninguna referencia en `src/`, y desinstalado `@radix-ui/react-avatar`. Typecheck verde, lint solo
+      `actionTypes` y build verde (16 páginas).
+
 ## Fases previstas (sin desarrollar todavía)
 
 Anotadas para no perderlas. Su alcance, entregables y tareas se definen al abrir cada fase; hoy solo
 existe la intención.
-
-### Fase 5 — Casos de estudio
-
-Rutas `/proyectos` y `/proyectos/[slug]` con fichas reales de proyecto (problema, solución,
-tecnologías, resultados). Sustituye a la sección Projects actual y depende de lo que se decida en la
-pregunta abierta de la Fase 1. Hay que elegir fuente de contenido (MDX en el repo frente a CMS) y
-generar metadatos por ficha con `generateMetadata`, además de incorporar las fichas al sitemap.
 
 ### Fase 6 — Blog MDX
 

@@ -1,0 +1,23 @@
+<Panel n="01" title="Problema">
+
+Un único asistente de IA que hace de todo pierde el contexto en cuanto el proyecto crece: mezcla convenciones, olvida decisiones y no hay un control claro de lo que se ha revisado. Hacía falta repartir el trabajo como en un equipo real, con responsables por área, revisión antes de dar algo por bueno y un estado del proyecto escrito, no guardado en una conversación.
+
+</Panel>
+
+<Panel n="02" title="Arquitectura">
+
+Un agente iniciador analiza el repositorio (o entrevista al usuario si está vacío) y genera tres cosas: el orquestador (las instrucciones del proyecto), los subagentes por área (desarrollo, SEO, revisión, pruebas, documentación) y los comandos `/fase` y `/modulo`. El estado vive en ficheros del repositorio: plan, tareas y registro de correcciones, además de notas por módulo.
+
+<Diagram />
+
+</Panel>
+
+<Decisions n="03" />
+
+<Panel n="04" title="Resultados">
+
+<Metrics />
+
+Esta web está hecha con él: 8 fases (limpieza, red de seguridad, SEO, rediseño, rendimiento, tema claro/oscuro, animaciones y estos casos de estudio), publicadas en 6 pull requests, con cada cambio revisado por un agente antes de cerrarse. Base Estelar es su panel visual.
+
+</Panel>

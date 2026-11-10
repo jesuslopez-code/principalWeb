@@ -13,6 +13,7 @@ que tienen particularidades propias cuentan con su carpeta `.claude/docs/<Modulo
 | Landing | `/` | 🟡 | ✅ | `.claude/docs/Landing/` |
 | Contacto | `/` (sección) | 🟢 | ✅ | `.claude/docs/Contacto/` |
 | SEO | transversal | 🟡 | 🔧 | `.claude/docs/SEO/` |
+| Casos de estudio | `/proyectos`, `/proyectos/[slug]` | 🔴 | 🔧 | `.claude/docs/CasosDeEstudio/` (Fase 5) |
 
 "Hecho" aquí significa que el módulo existe y funciona, no que esté cerrado: la Fase 1 toca Landing
 (sección Projects) y las Fases 3 y 4 son el grueso de SEO.
@@ -24,7 +25,6 @@ correspondiente en `tareas.md`.
 
 | Módulo | Ruta prevista | Complejidad | Estado | Fase |
 |--------|---------------|-------------|--------|------|
-| Casos de estudio | `/proyectos`, `/proyectos/[slug]` | 🔴 | ⬜ | Fase 5 |
 | Blog | `/blog` | 🔴 | ⬜ | Fase 6 |
 | Tema claro/oscuro | transversal | 🟡 | ⬜ | Fase 7 |
 | Animaciones | transversal | 🟢 | ⬜ | Fase 8 |
