@@ -88,6 +88,7 @@ export function ContactForm() {
   return (
     <Form {...form}>
       <form
+        noValidate
         onSubmit={form.handleSubmit(onSubmit)}
         className="space-y-6"
       >
@@ -99,7 +100,7 @@ export function ContactForm() {
               <FormItem>
                 <FormLabel>Nombre</FormLabel>
                 <FormControl>
-                  <Input placeholder="Tu nombre" {...field} />
+                  <Input placeholder="Tu nombre" autoComplete="name" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -112,7 +113,7 @@ export function ContactForm() {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="tu@email.com" {...field} />
+                  <Input type="email" placeholder="tu@email.com" autoComplete="email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>

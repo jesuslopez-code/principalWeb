@@ -1,0 +1,121 @@
+/* Telón de entrada. Oculto por defecto; solo se ve con la clase "intro-telon" en <html>
+   (la pone el script de <head> o el botón «ver intro»). Los --it-* son colores propios del telón. */
+.it-telon {
+  --it-tela: 42 18% 95%;
+  --it-tela-sombra: 42 10% 82%;
+  --it-tinta: 232 30% 12%;
+  --it-tinta-acento: 262 60% 45%;
+  --it-tubo: 228 10% 22%;
+  --it-tubo-brillo: 228 10% 40%;
+  --it-lastra: 228 12% 16%;
+  --it-sombra: 0 0% 0%;
+  --it-oro: #d9a92e;
+  --it-oro-claro: #fff4c2;
+  --it-capa: #c0283f;
+  --it-capa-forro: #8f1c2e;
+  --it-bota: #1b2236;
+  --it-tinta-g: #2b1d14;
+  --it-blanco: #f4f6fb;
+  --it-panel: #cfd6e6;
+  --it-cian: #6fd3e8;
+  --it-sala: #c9c3b3;
+  --it-ala: #d9deea;
+  --it-mochila: #aeb6c9;
+  --it-casco: #c8e1ff;
+  --it-casco-borde: #dbe6ff;
+  --it-piel: #f1c9a0;
+  --it-pelo: #3b3f4a;
+  --it-mejilla: #e58b7a;
+  --suelo: 110px;
+
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+}
+html.intro-telon .it-telon { display: block; }
+.it-telon.fundido { opacity: 0; transition: opacity 0.25s; }
+
+.it-tubo {
+  position: absolute; top: 0; left: -2%; right: -2%; height: 26px; z-index: 3;
+  border-radius: 0 0 13px 13px;
+  background: linear-gradient(180deg, hsl(var(--it-tubo-brillo)), hsl(var(--it-tubo)) 55%, hsl(var(--it-lastra)));
+  box-shadow: 0 6px 14px -4px hsl(var(--it-sombra) / 0.6);
+  transition: transform 0.35s cubic-bezier(0.5, 0, 0.75, 0);
+}
+.it-tubo::after {
+  content: ""; position: absolute; left: 50%; top: 8px; width: 70px; height: 6px; margin-left: -35px;
+  border-radius: 3px; background: hsl(var(--it-lastra));
+}
+.it-telon.fuera .it-tubo { transform: translateY(-140%); }
+
+.it-pantalla { position: absolute; left: 0; right: 0; top: 0; height: calc(100% - var(--suelo)); z-index: 2; transform-origin: top; will-change: transform; }
+.it-tela {
+  position: absolute; inset: 0; display: grid; place-items: center; text-align: center; overflow: hidden;
+  color: hsl(var(--it-tinta));
+  background: linear-gradient(180deg, hsl(var(--it-tela)) 0%, hsl(var(--it-tela)) 85%, hsl(var(--it-tela-sombra)) 100%);
+  box-shadow: inset 18px 0 30px -24px hsl(var(--it-sombra) / 0.35), inset -18px 0 30px -24px hsl(var(--it-sombra) / 0.35);
+}
+.it-tela::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(180deg, transparent 0 3px, hsl(var(--it-tinta) / 0.025) 3px 4px);
+}
+.it-proyeccion { padding: 1.5rem; max-width: 40rem; }
+.it-marca { font-size: clamp(2.5rem, 9vw, 4.5rem); letter-spacing: -0.02em; line-height: 1.5; }
+.it-marca span { color: hsl(var(--it-tinta-acento)); }
+.it-linea { margin-top: 1.25rem; font-size: clamp(0.75rem, 2.6vw, 0.95rem); min-height: 1.6em; color: hsl(var(--it-tinta) / 0.85); }
+.it-cur {
+  display: inline-block; width: 0.5em; height: 1.05em; margin-left: 0.15em; vertical-align: -0.18em;
+  background: hsl(var(--it-tinta-acento)); animation: it-parp 1s steps(1) infinite;
+}
+@keyframes it-parp { 50% { opacity: 0; } }
+.it-lastra {
+  position: absolute; left: 0; right: 0; bottom: -6px; height: 12px; border-radius: 6px;
+  background: linear-gradient(180deg, hsl(var(--it-tubo-brillo)), hsl(var(--it-lastra)));
+  box-shadow: 0 4px 10px -2px hsl(var(--it-sombra) / 0.5);
+}
+.it-tirador { position: absolute; left: 50%; top: calc(100% + 4px); width: 4px; height: 30px; margin-left: -2px; background: hsl(var(--it-lastra)); }
+.it-tirador::after {
+  content: ""; position: absolute; left: 50%; bottom: -16px; width: 22px; height: 22px; margin-left: -11px;
+  border-radius: 50%; border: 4px solid hsl(var(--it-lastra)); background: transparent;
+}
+
+.it-orq {
+  position: absolute; top: 100%; left: 50%; width: 120px; height: 150px; margin-left: -60px; z-index: 4;
+  transform: translateX(calc(-50vw - 80px)); transition: transform 0.6s cubic-bezier(0.3, 0.6, 0.4, 1);
+}
+.it-orq svg { position: absolute; left: 0; bottom: calc(154px - var(--suelo)); width: 120px; height: 150px; overflow: visible; }
+.it-orq .pierna, .it-orq .brazo { transform-box: fill-box; transform-origin: 50% 0; }
+.it-orq .brazo { fill: var(--it-oro); transition: transform 0.35s cubic-bezier(0.3, 0.7, 0.3, 1); }
+.it-orq .cuerpo, .it-orq .traje { fill: var(--it-oro); }
+.it-orq .bota { fill: var(--it-bota); }
+.it-orq .cara { fill: var(--it-piel); }
+.it-orq .pelo { fill: var(--it-pelo); }
+.it-orq .ojo { fill: var(--it-tinta-g); }
+.it-orq .mejilla { fill: var(--it-mejilla); opacity: 0.55; }
+.it-orq .boca { fill: none; stroke: var(--it-tinta-g); stroke-width: 1; stroke-linecap: round; }
+.it-orq .ceja { fill: none; stroke: var(--it-pelo); stroke-width: 1; stroke-linecap: round; }
+.it-orq .capa { fill: var(--it-capa); }
+.it-orq .forro { fill: var(--it-capa-forro); }
+.it-orq .cinturon, .it-orq .collar, .it-orq .boton--blanco { fill: var(--it-blanco); }
+.it-orq .estrella, .it-orq .galon { fill: var(--it-oro-claro); }
+.it-orq .panel { fill: var(--it-panel); }
+.it-orq .boton--cian { fill: var(--it-cian); }
+.it-orq .boton--area { fill: var(--it-sala); animation: it-parpadeo 1s ease-in-out infinite alternate; }
+.it-orq .ala { fill: var(--it-ala); stroke: var(--it-mochila); stroke-width: 0.8; stroke-linejoin: round; }
+.it-orq .casco { fill: var(--it-casco); fill-opacity: 0.2; stroke: var(--it-casco-borde); stroke-width: 1.3; }
+.it-orq .reflejo { fill: none; stroke: var(--it-blanco); stroke-width: 1.2; stroke-linecap: round; opacity: 0.75; }
+@keyframes it-parpadeo { from { opacity: 1; } to { opacity: 0.35; } }
+.it-orq.andando .pierna--a { animation: it-paso 0.16s ease-in-out infinite alternate; }
+.it-orq.andando .pierna--b { animation: it-paso 0.16s ease-in-out infinite alternate-reverse; }
+.it-orq.andando .brazo--a { animation: it-balanceo 0.16s ease-in-out infinite alternate; }
+@keyframes it-paso { from { transform: rotate(-22deg); } to { transform: rotate(22deg); } }
+@keyframes it-balanceo { from { transform: rotate(18deg); } to { transform: rotate(-18deg); } }
+.it-orq.agarra .brazo--b { transform: rotate(-168deg); }
+.it-orq.saluda .brazo--a { animation: it-saludo 0.32s ease-in-out infinite alternate; }
+@keyframes it-saludo { from { transform: rotate(150deg); } to { transform: rotate(190deg); } }
+.it-orq.colgado .pierna--a { transform: rotate(-12deg); }
+.it-orq.colgado .pierna--b { transform: rotate(14deg); }
+
+@media (max-width: 520px) { .it-telon { --suelo: 96px; } }
+@media (prefers-reduced-motion: reduce) { .it-telon { display: none !important; } }

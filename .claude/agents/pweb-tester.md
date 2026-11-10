@@ -118,7 +118,19 @@ normal: el **código**, los **mensajes de commit/PR**, los **avisos de seguridad
 - Servidor de desarrollo: `npm run dev` → http://localhost:9002
 
 ## Resultados de referencia
-_(vacío)_
+- Método de navegador (2026-11-09): puppeteer-core y Lighthouse viven en `C:\Users\1992j\qa-tema7\node_modules`; en la
+  carpeta de trabajo, junction `mklink /J node_modules <esa ruta>` e `import 'puppeteer-core'`. Chrome en
+  `C:/Program Files/Google/Chrome/Application/chrome.exe`, `headless:'new'`; un `createBrowserContext()` por caso = perfil
+  limpio. Build de producción en :3100 (`npm run start -- -p 3100`). Scripts en `C:\Users\1992j\qa-fase8`.
+- Lighthouse: `environment.benchmarkIndex` del JSON varía 1000-2400 entre tandas en esta máquina; anotarlo siempre y
+  comparar solo pasadas intercaladas (primera visita / repetida, mismo Chrome). Tema oscuro = Chrome con
+  `--blink-settings=preferredColorScheme=1`. Visita repetida = `--disable-storage-reset` tras una primera visita en el
+  mismo perfil. Elemento LCP: `audits['lcp-breakdown-insight'].details.items` (el de tipo node).
+- Fotogramas de carga (`Page.startScreencast`): el primer fotograma es el fondo del navegador (#121212 en oscuro, o blanco),
+  no la web; con tolerancia alta se confunde con `#0e0f16`. Clasificar con tolerancia ≤6 y revisar a ojo.
+- Telón de entrada: clave `intro-vista` en localStorage; para probar sin telón, sembrarla con `evaluateOnNewDocument`.
+  Anclas reales: `#about`, `#projects`, `#skills`, `#contact` (en inglés). Cualquier tecla (Tab incluido) corta el telón.
+- En Bash, no meter código con comillas invertidas dentro de `node -e "..."`: el shell las ejecuta. Usar Edit o un fichero.
 
 ## Correcciones registradas
 _(vacío)_

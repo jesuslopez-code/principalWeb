@@ -115,7 +115,8 @@ apartado con particularidades propias tiene un fichero **`.claude/docs/<Modulo>/
 (hoy: `Landing`, `Contacto`, `SEO`). Al trabajar en un módulo, tanto el hilo principal como el
 agente correspondiente **deben consultar** ese fichero.
 
-**Jerarquía (no contradecir hacia arriba):** global personal › `CLAUDE.md` › agentes `pweb-*` ›
+**Jerarquía (no contradecir hacia arriba):** `CLAUDE.md`/`AGENTS.md` del proyecto › global personal
+› agentes `pweb-*` ›
 `NotasAgentes.md` de módulo. Un nivel inferior NO puede contradecir a uno superior. Si para una
 tarea hiciera falta algo no cubierto por ningún nivel, o algo que contradice una directriz superior,
 **preguntar antes de actuar**.
@@ -155,6 +156,21 @@ borradas, primitivas shadcn sin usar retiradas, y la red de seguridad del build 
 - Si aplica, probado. **Antes de lanzar `pweb-tester`, preguntar a Jesús** si prefiere probarlo él.
 - Ante un fallo reportado tras un cambio, verificar primero que el servidor de desarrollo recargó y
   está sirviendo el código nuevo, antes de diagnosticar el síntoma.
+
+## Cierre de fase y archivo de fixes
+
+- **Cerrar la fase en `tareas.md`.** En cuanto todas sus casillas estén `[x]` y haya pasado la
+  revisión, pon `**Estado:** hecho` en la fase (si falta que Jesús la valide:
+  `hecho (pendiente de validar)`) y la misma marca en su fila de `plan-implementacion.md`. Sin ese
+  cambio la fase sigue «en curso» y sus tareas no salen de la pizarra del panel. Al empezar una fase
+  nueva, si la anterior tiene todo `[x]` y no está cerrada, ciérrala primero. Si quedan tareas que no
+  se van a hacer ahora, pon `en pausa` y explica por qué en el relevo.
+- **Archivar los fixes resueltos.** Al cerrar una fase o un módulo (y cuando Jesús lo pida), mueve
+  cada entrada `✅ ARREGLADA` de `fixes.md` al final de `fixes-archivo.md`, en la misma carpeta
+  (créalo con el título `# Correcciones archivadas` si no existe), sin cambiar su texto y añadiendo
+  `- **Archivada:** <AAAA-MM-DD>`. En `fixes.md` quedan solo las 🔧 y las ⏳. Los números no se
+  reutilizan: el siguiente FIX sigue al más alto de los dos ficheros. Mover no es borrar: ninguna
+  entrada se pierde.
 
 ## Registrar correcciones del usuario
 

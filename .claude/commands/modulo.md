@@ -15,5 +15,6 @@ Pasos:
    contenido y estilos; `pweb-seo` para los metadatos de la ruta nueva, su entrada en el sitemap y
    la semántica. Registra en el `NotasAgentes.md` del módulo las decisiones tomadas.
 5. **Cerrar.** Revisión con `pweb-reviewer`. Antes de `pweb-tester`, **pregunta** si Jesús prefiere
-   probarlo él. Actualiza `modulos.md` (✅) y anota incidencias en `fixes.md`. No hagas commit ni
+   probarlo él. Actualiza `modulos.md` (✅) y anota incidencias en `fixes.md`;
+   archiva las ✅ en `fixes-archivo.md` (ver `CLAUDE.md`). No hagas commit ni
    borres ficheros.

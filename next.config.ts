@@ -1,34 +1,7 @@
 import type {NextConfig} from 'next';
 
-const nextConfig: NextConfig = {
-  images: {
-    remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'placehold.co',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'picsum.photos',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'jesuslopezweb.com',
-        port: '',
-        pathname: '/**',
-      }
-    ],
-  },
-};
+// Sin remotePatterns: todas las imágenes son locales (public/). Si se trae una externa,
+// declarar aquí su host o next/image falla.
+const nextConfig: NextConfig = {};
 
 export default nextConfig;

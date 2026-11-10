@@ -81,3 +81,32 @@ Lo que falta:
 
 ---
 _Este fichero lo amplían los agentes por auto-actualización con lo que aprenden en el módulo._
+
+## Fase 4 (rendimiento y accesibilidad)
+
+- `remotePatterns` eliminados: no hay imágenes externas. Al traer una, declarar su host.
+- `next dev` puede mostrar `Failed to fetch JetBrains Mono`: es red; `next build` descarga bien.
+- Con `next dev` ocupando `.next`, el build se probó en una copia del repo en `/tmp` (con junction a
+  `node_modules`; retirarla con `rmdir`, nunca `rm -rf`).
+- Ninguna `next/image` lleva `priority` a propósito: el LCP es el `<h1>`.
+- Contraste medido (WCAG, tokens `.dark`): texto >= 5,6:1 en todos los pares (muted-foreground 6,7-7,1;
+  primary 5,6-5,9; foreground/60 6,1). Único borde por debajo: `--input` 2,96:1 contra el fondo
+  (pide 3:1 para controles de formulario).
+
+## Paleta de OG e iconos (Fase 3B, violeta .NET)
+
+`opengraph-image.tsx`, `icon.svg` y `apple-icon.tsx` no leen variables CSS: llevan hex fijos
+equivalentes a los tokens `.dark` (`#0e0f16` fondo, `#e6e8f0` texto, `#989dae` apagado, `#9e77f8`
+primary, `#75d1bf` code-string, `#2b2d3b` borde). Si cambia la paleta en `globals.css`, actualizar
+estos tres a mano.
+
+## Fase 7 (tema claro/oscuro)
+
+- Tema gestionado por `next-themes` (clase `dark` en `<html>`, `defaultTheme="system"`); ya no hay `dark` fijo.
+- `viewport.themeColor` por media query: claro `#f6f4fb` (= `--background` claro), oscuro `#0e0f16`. Sigue
+  al sistema, no al conmutador. No se usa `viewport.colorScheme`: `next-themes` ya fija `color-scheme` inline.
+- Si cambia `--background` en `globals.css`, actualizar esos dos hex en `layout.tsx` (y OG/iconos, que son oscuros).
+- Para probar un tema en Chrome headless/Lighthouse: `--blink-settings=preferredColorScheme=0` (oscuro) o `=1`
+  (claro). `--force-prefers-color-scheme` NO funciona en Chrome 156 headless.
+- Contraste claro medido y Lighthouse A11y 100 en ambos temas (detalle en `tareas.md`, Fase 7). Salvedad:
+  `text-destructive` en oscuro 1,6-1,9:1 (pendiente de `pweb-frontend-dev`).

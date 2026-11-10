@@ -15,5 +15,6 @@ Pasos:
 4. Marca el estado en `tareas.md` (`[~]` al empezar, `[x]` al cerrar cada tarea).
 5. Cierra la fase: revisión con `pweb-reviewer`. Antes de lanzar `pweb-tester`, **pregunta** a Jesús
    si prefiere probarlo él. Anota en `fixes.md` lo que aparezca al probar.
-6. **PARA al terminar la fase** y resume qué quedó hecho y cómo probarlo, para que Jesús valide
+6. Pon la fase `hecho` en `tareas.md` y archiva los fixes ✅ en `fixes-archivo.md` (sección «Cierre
+   de fase y archivo de fixes» de `CLAUDE.md`). **PARA al terminar la fase** y resume qué quedó hecho y cómo probarlo, para que Jesús valide
    antes de seguir. No hagas commit ni borres ficheros.

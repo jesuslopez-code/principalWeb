@@ -1,0 +1,390 @@
+/* Hoja acotada a la demo de Base Estelar: reproduce su app, no la paleta de la web. */
+/* Los --kp-* son la paleta propia de Base Estelar (tokens.css), por eso no usan los tokens de la web. */
+.base-estelar-demo {
+  color-scheme: dark;
+
+  /* Superficies */
+  --kp-color-fondo: #0f1115;
+  --kp-color-superficie: #171a21;
+  --kp-color-superficie-elevada: #1e222b;
+  --kp-color-superficie-hundida: #12151a;
+
+  /* Texto */
+  --kp-color-texto: #e6e8ec;
+  --kp-color-texto-suave: #9aa1ad;
+  --kp-color-texto-tenue: #6f7683;
+
+  /* Bordes y foco */
+  --kp-color-borde: #2a2f3a;
+  --kp-color-borde-fuerte: #3a4150;
+  --kp-color-foco: #7aa2f7;
+
+  /* Acentos por estado (apagados a propósito: panel sobrio) */
+  --kp-color-pendiente: #8b95a7;
+  --kp-color-en-curso: #6e9bd8;
+  --kp-color-hecho: #5fae80;
+  --kp-color-en-pausa: #a08bc4;
+  --kp-color-borrador: #d4a24c;
+  --kp-color-aprobado: #5fae80;
+  --kp-color-sin-diseno: #7a8291;
+  --kp-color-aviso: #d98a5a;
+  --kp-color-error: #d9706b;
+  --kp-color-velo: rgb(8 10 14 / 0.72);
+
+  /* Oficina: color de cada sala (cuerpo del muñeco y cabecera de la sala) */
+  --kp-sala-backend: #5b8fd9;
+  --kp-sala-frontend: #8d84dc;
+  --kp-sala-datos: #4faa8a;
+  --kp-sala-movil: #cf6f99;
+  --kp-sala-revision: #d98260;
+  --kp-sala-vigilancia: #8a92a1;
+  --kp-sala-docs: #a9b84e;
+  --kp-sala-otros: #a39580;
+  --kp-sala-orquestador: #c9c3b3;
+
+  /* Oficina: suelo (tinte oscuro de la familia de la sala) y borde algo más vivo.
+     Texto y suave dan >= 4,7:1 sobre cada suelo; «tenue» no llega a AA y no se usa sobre ellos. */
+  --kp-sala-backend-suelo: #1b283c;
+  --kp-sala-backend-borde: #3a65a6;
+  --kp-sala-frontend-suelo: #25203c;
+  --kp-sala-frontend-borde: #6558bd;
+  --kp-sala-datos-suelo: #153530;
+  --kp-sala-datos-borde: #36ab9b;
+  --kp-sala-movil-suelo: #3c202a;
+  --kp-sala-movil-borde: #9d4364;
+  --kp-sala-revision-suelo: #3b231c;
+  --kp-sala-revision-borde: #a4553d;
+  --kp-sala-docs-suelo: #303515;
+  --kp-sala-docs-borde: #9bab36;
+  /* Taupe cálido y apagado (poco saturado): no se confunde con el ámbar de «esperando» */
+  --kp-sala-orquestador-suelo: #312b26;
+  --kp-sala-orquestador-borde: #937a62;
+  --kp-sala-otros-suelo: #1d2028;
+  --kp-sala-otros-borde: #3a4150;
+
+  /* Oficina: semáforo de Vigilancia. Reposo = verde salvia apagado; deriva = rojo.
+     Sobre el suelo verde: texto normal 6,4:1, punto «trabajando» 3,0:1, borde 4,2:1; el texto suave
+     NO llega (2,6:1) y no se usa en esa sala. El acento (franja) es decorativo, no para texto. */
+  --kp-sala-vigilancia-ok: #bfe3c0;
+  --kp-sala-vigilancia-ok-suelo: #3b5841;
+  --kp-sala-vigilancia-ok-borde: #8fc79a;
+  --kp-sala-vigilancia-deriva: #e0605c;
+  --kp-sala-vigilancia-deriva-suelo: #5d1d1f;
+  --kp-sala-vigilancia-deriva-borde: #d13a40;
+
+  /* Oficina: estado de actividad (puntito del muñeco) */
+  --kp-actividad-trabajando: #4fb286;
+  --kp-actividad-esperando: #e0a43c;
+  --kp-actividad-libre: #7b8391;
+
+  /* Oficina: salas con trabajo en el paso actual de la fase (cian; el naranja es de «esperando»). Sobre el fondo oscuro da más de 9:1 */
+  --kp-fase-curso: #3fd0e6;
+
+  /* Oficina: semáforo de tests y build (el texto acompaña siempre al color) */
+  --kp-semaforo-correcto: var(--kp-actividad-trabajando);
+  --kp-semaforo-fallido: var(--kp-color-error);
+  --kp-semaforo-desconocido: var(--kp-actividad-libre);
+
+  /* Oficina: muñecos y mobiliario */
+  --kp-muneco-piel: #f1c9a0;
+  --kp-muneco-pelo: #3b3f4a;
+  --kp-muneco-piel-1: #f1d6be;
+  --kp-muneco-piel-2: #e0bb98;
+  --kp-muneco-piel-3: #c68f68;
+  --kp-muneco-piel-4: #a8775a;
+  --kp-muneco-piel-5: #7a5238;
+  --kp-muneco-piel-6: #5c3a26;
+  --kp-muneco-pelo-1: #111111;
+  --kp-muneco-pelo-2: #2b211c;
+  --kp-muneco-pelo-3: #4a3426;
+  --kp-muneco-pelo-4: #9a5b2e;
+  --kp-muneco-pelo-5: #c9a45c;
+  --kp-muneco-pelo-6: #7d7f86;
+  --kp-muneco-pierna: #2d323d;
+  --kp-muneco-ojo: #20232b;
+  --kp-muneco-mejilla: #e58b7a;
+  /* Oficina 3D: guardianes (traje del color de la sala; el resto es común) */
+  --kp-guardian-casco: #c8e1ff;
+  --kp-guardian-casco-borde: #dbe6ff;
+  --kp-guardian-casco-empanado: #dce4f5;
+  --kp-guardian-error: #ef5350;
+  --kp-guardian-mejilla-error: #e0483c;
+  --kp-guardian-espera: #f08a3c;
+  --kp-guardian-blanco: #f4f6fb;
+  --kp-guardian-panel: #cfd6e6;
+  --kp-guardian-boton-cian: #6fd3e8;
+  --kp-guardian-boton-claro: #fff4dc;
+  --kp-guardian-ala: #d9deea;
+  --kp-guardian-mochila: #aeb6c9;
+  --kp-guardian-bota: #1b2236;
+  --kp-guardian-tinta: #2b1d14;
+  --kp-guardian-oro: #d9a92e;
+  --kp-guardian-oro-claro: #fff4c2;
+  --kp-guardian-capa: #c0283f;
+  --kp-guardian-capa-forro: #8f1c2e;
+  --kp-obj-taza: #e8e4dc;
+  --kp-obj-taza-borde: #9a9488;
+  --kp-obj-vapor: #c9ccd4;
+  --kp-obj-mesa: #6b707b;
+  --kp-obj-pantalla: #7aa2c8;
+  --kp-obj-cafetera: #5f6470;
+  --kp-obj-bandeja: #d4a24c;
+  --kp-postit-pendiente: #e7b3a2;
+  --kp-postit-en-curso: #f0c878;
+  --kp-postit-hecho: #b7d79a;
+  --kp-postit-texto: #2a2c33;
+
+  /* Bienvenida: cielo, planeta y consola (solo se usan en esa pantalla) */
+  --kp-espacial-vacio: #05070c;
+  --kp-espacial-consola: rgb(18 22 30 / 0.86);
+  --kp-espacial-sombra: rgb(0 0 0 / 0.5);
+  --kp-espacial-cian: #5fd4e6;
+  --kp-espacial-cian-tenue: rgb(95 212 230 / 0.7);
+  --kp-espacial-estrella: #cfd6e4;
+  --kp-espacial-halo: rgb(59 110 165 / 0.55);
+  --kp-espacial-halo-suave: rgb(59 110 165 / 0.12);
+  --kp-espacial-foco-fondo: rgb(122 162 247 / 0.16);
+  --kp-espacial-foco-fondo-activo: rgb(122 162 247 / 0.24);
+  --kp-planeta-claro: #3b6ea5;
+  --kp-planeta-medio: #1c3657;
+  --kp-planeta-oscuro: #0d1a2a;
+  --kp-planeta-brillo: rgb(122 184 255 / 0.35);
+
+  /* Oficina 3D (estación orbital): materiales y luces de la escena. Los colores de sala, de estado y del
+     mobiliario salen de los tokens de arriba; aquí solo lo propio del 3D. */
+  --kp-estacion-casco: #2b3038;
+  --kp-estacion-nucleo: #23272f;
+  --kp-estacion-cristal: #9ad0ff;
+  --kp-estacion-llama: #7aa2f7;
+  --kp-estacion-panel-solar: #1d3b6e;
+  --kp-estacion-panel-junta: #3a6aa8;
+  --kp-estacion-corcho: #5a4330;
+  --kp-estacion-papel: #e6e8ec;
+  --kp-estacion-atmosfera: #7ab8ff;
+  --kp-estacion-luz-cielo: #c9d2e3;
+  --kp-estacion-luz-suelo: #14171d;
+  --kp-estacion-luz-sol: #fff2e2;
+
+  /* Espaciado */
+  --kp-espacio-xs: 0.25rem;
+  --kp-espacio-s: 0.5rem;
+  --kp-espacio-m: 1rem;
+  --kp-espacio-l: 1.5rem;
+  --kp-espacio-xl: 2.5rem;
+
+  /* Radios */
+  --kp-radio-s: 4px;
+  --kp-radio-m: 8px;
+  --kp-radio-pildora: 999px;
+
+  /* Tipografía */
+  --kp-fuente-base: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --kp-fuente-mono: ui-monospace, 'Cascadia Mono', Consolas, monospace;
+  --kp-texto-xs: 0.75rem;
+  --kp-texto-s: 0.8125rem;
+  --kp-texto-m: 0.9375rem;
+  --kp-texto-l: 1.125rem;
+  --kp-texto-xl: 1.5rem;
+  --kp-peso-normal: 400;
+  --kp-peso-medio: 600;
+  --kp-interlineado: 1.5;
+
+  /* Layout */
+  /* Fase 24: el panel usa todo el ancho de la ventana (antes 80rem). */
+  --kp-ancho-maximo: none;
+  --kp-ancho-columna: 15rem;
+  --kp-alto-barra: 6px;
+
+  /* Terminal integrada («cristal holográfico»): panel translúcido sobre la estación */
+  --kp-terminal-cristal: rgb(14 22 34 / 0.72);
+  --kp-terminal-cristal-opaco: #0e1622;
+  --kp-terminal-borde: rgb(154 208 255 / 0.25);
+  --kp-terminal-borde-fuerte: rgb(154 208 255 / 0.45);
+  --kp-terminal-brillo: rgb(255 255 255 / 0.08);
+  --kp-ayuda-sombra: 0 4px 16px rgb(0 0 0 / 0.5);
+  --kp-terminal-sombra: 0 20px 60px rgb(0 0 0 / 0.5);
+  --kp-terminal-desenfoque: 14px;
+  --kp-terminal-barrido: rgb(154 208 255 / 0.06);
+  --kp-terminal-pestana: #b9d8f5;
+  --kp-terminal-pestana-activa-fondo: rgb(154 208 255 / 0.16);
+  --kp-terminal-pestana-activa-texto: #ffffff;
+  --kp-terminal-piloto-viva: #5fae80;
+  --kp-terminal-piloto-montar: #e0a85a;
+  --kp-terminal-piloto-terminada: #6f7683;
+  --kp-terminal-asa: rgb(154 208 255 / 0.35);
+  --kp-terminal-margen: 1rem;
+  --kp-terminal-radio: 12px;
+  --kp-terminal-texto: #dcecff;
+  --kp-terminal-cursor: #9ad0ff;
+  --kp-terminal-seleccion: rgb(122 162 247 / 0.35);
+  --kp-terminal-xterm-fondo: rgb(0 0 0 / 0);
+  /* Paleta ANSI de xterm: derivada de los acentos del panel */
+  --kp-terminal-ansi-negro: #3a4150;
+  --kp-terminal-ansi-rojo: #d9706b;
+  --kp-terminal-ansi-verde: #5fae80;
+  --kp-terminal-ansi-amarillo: #d4a24c;
+  --kp-terminal-ansi-azul: #6e9bd8;
+  --kp-terminal-ansi-magenta: #a08bc4;
+  --kp-terminal-ansi-cian: #5fd4e6;
+  --kp-terminal-ansi-blanco: #c4cad4;
+  --kp-terminal-ansi-negro-vivo: #6f7683;
+  --kp-terminal-ansi-rojo-vivo: #ee8f8a;
+  --kp-terminal-ansi-verde-vivo: #7fc79c;
+  --kp-terminal-ansi-amarillo-vivo: #e8bf6e;
+  --kp-terminal-ansi-azul-vivo: #8fb6f0;
+  --kp-terminal-ansi-magenta-vivo: #bba8dd;
+  --kp-terminal-ansi-cian-vivo: #9ad0ff;
+  --kp-terminal-ansi-blanco-vivo: #e6e8ec;
+
+  /* Mando y uso de la suscripción (Fase 16) */
+  --kp-uso-normal: var(--kp-color-en-curso);
+  --kp-uso-aviso: var(--kp-color-aviso);
+  --kp-uso-limite: var(--kp-color-error);
+  --kp-franja-aviso-fondo: rgb(217 138 90 / 0.14);
+  --kp-franja-limite-fondo: rgb(217 112 107 / 0.18);
+
+  /* Diff de los cambios de los agentes (Fase 18) */
+  --kp-diff-anadida: var(--kp-color-hecho);
+  --kp-diff-quitada: var(--kp-color-error);
+  --kp-diff-anadida-fondo: rgb(95 174 128 / 0.14);
+  --kp-diff-quitada-fondo: rgb(217 112 107 / 0.14);
+  --kp-diff-bloque: var(--kp-color-en-curso);
+  --kp-diff-elegida: rgb(122 162 247 / 0.28);
+}
+
+  .base-estelar-demo {
+    /* Ajustes de la maqueta aprobada sobre tokens.css: terminal opaco, ANSI y color de Claude. */
+    --kp-terminal-cristal: #0e1622;
+    --ansi-gris: #6f7683;
+    --ansi-verde: #7fc79c;
+    --ansi-amarillo: #e8bf6e;
+    --ansi-cian: #5fd4e6;
+    --ansi-magenta: #bba8dd;
+    --claude: #d77757;
+  }
+
+  .base-estelar-demo { margin-top: 16px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; padding: 12px; border: 1px solid hsl(var(--border)); border-radius: 8px; background: var(--kp-color-fondo); color: var(--kp-color-texto); }
+  @media (min-width: 900px) { .base-estelar-demo { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+  /* Panel de terminal (terminal.css) */
+  .base-estelar-demo .panel-terminal { position: relative; display: flex; flex-direction: column; overflow: hidden; min-height: 300px; border: 1px solid var(--kp-terminal-borde); border-radius: 12px; background: var(--kp-terminal-cristal); box-shadow: 0 20px 60px rgb(0 0 0 / .5), inset 0 1px 0 var(--kp-terminal-brillo); color: var(--kp-terminal-texto); }
+  .base-estelar-demo .panel-terminal::after { content: ""; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(180deg, transparent 0%, var(--kp-terminal-barrido) 50%, transparent 100%); background-size: 100% 300%; animation: kp-barrido 6s linear infinite; }
+  @keyframes kp-barrido { from { background-position: 0 0; } to { background-position: 0 300%; } }
+  .base-estelar-demo .barra { display: flex; align-items: center; gap: 6px; padding: 6px 8px; border-bottom: 1px solid var(--kp-terminal-borde); font: 12px var(--kp-fuente-base); }
+  .base-estelar-demo .pestana { display: inline-flex; align-items: center; gap: 6px; padding: 3px 10px; border-radius: 6px; color: var(--kp-terminal-pestana); }
+  .base-estelar-demo .pestana--activa { background: var(--kp-terminal-pestana-activa-fondo); color: #fff; }
+  .base-estelar-demo .piloto { width: 7px; height: 7px; border-radius: 50%; background: var(--kp-terminal-piloto-viva); }
+  .base-estelar-demo .barra .mas { margin-left: auto; color: var(--kp-terminal-pestana); padding: 0 6px; }
+  .base-estelar-demo .xterm { flex: 1; min-height: 0; overflow: hidden; padding: 10px 12px; font: 12.5px/1.55 var(--kp-fuente-mono); display: flex; flex-direction: column; }
+  @media (max-width: 899px) { .base-estelar-demo .xterm { height: 300px; font-size: 11.5px; } }
+  .base-estelar-demo .log { flex: 1; min-height: 0; overflow: hidden; display: flex; flex-direction: column; gap: 1px; }
+  .base-estelar-demo .log p { white-space: pre-wrap; word-break: break-word; }
+  .base-estelar-demo .bienvenida { border: 1px solid var(--claude); border-radius: 6px; padding: 4px 10px; margin-bottom: 8px; }
+  .base-estelar-demo .bienvenida b { color: var(--claude); font-weight: 400; }
+  .base-estelar-demo .c-gris { color: var(--ansi-gris); } .base-estelar-demo .c-verde { color: var(--ansi-verde); } .base-estelar-demo .c-amar { color: var(--ansi-amarillo); } .base-estelar-demo .c-cian { color: var(--ansi-cian); } .base-estelar-demo .c-claude { color: var(--claude); }
+  .base-estelar-demo .c-blanco { color: #fff; font-weight: 600; }
+  .base-estelar-demo .vivo { animation: kp-parpadeo 1s steps(1) infinite; }
+  @keyframes kp-parpadeo { 50% { opacity: .25; } }
+  .base-estelar-demo .entrada { margin-top: 8px; border: 1px solid var(--kp-color-borde-fuerte); border-radius: 6px; padding: 4px 10px; }
+  .base-estelar-demo .entrada .cur { display: inline-block; width: .6em; height: 1.1em; background: var(--kp-terminal-cursor); vertical-align: -.2em; animation: kp-parpadeo 1s steps(1) infinite; }
+  .base-estelar-demo .pista { color: var(--ansi-gris); font-size: .9em; padding: 2px 4px 0; }
+
+  .base-estelar-demo [hidden] { display: none !important; }
+  .base-estelar-demo .visor { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+  .base-estelar-demo .conmutador { align-self: flex-end; display: inline-flex; gap: 2px; padding: 2px; border: 1px solid var(--kp-color-borde-fuerte); border-radius: 8px; background: var(--kp-color-superficie); }
+  .base-estelar-demo .vista-btn { font: 12px var(--kp-fuente-base); color: var(--kp-color-texto-suave); background: none; border: 0; padding: 4px 12px; border-radius: 6px; cursor: pointer; }
+  .base-estelar-demo .vista-btn:hover { color: var(--kp-color-texto); }
+  .base-estelar-demo .vista-btn[aria-pressed="true"] { background: var(--kp-terminal-pestana-activa-fondo); color: #fff; }
+  .base-estelar-demo .vista-btn:focus-visible { outline: 2px solid var(--kp-terminal-cursor); outline-offset: 2px; }
+  .base-estelar-demo .vista { position: relative; aspect-ratio: 680 / 752; }
+  .base-estelar-demo .vista > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .base-estelar-demo .vista3d { position: absolute; inset: 0; border-radius: 10px; overflow: hidden; }
+  .base-estelar-demo .vista3d canvas { display: block; width: 100%; height: 100%; }
+  .base-estelar-demo .sin-webgl { position: absolute; inset: 0; display: grid; place-items: center; font: 13px var(--kp-fuente-base); color: var(--kp-color-texto-suave); }
+
+  /* Plano (oficina.css) */
+  .base-estelar-demo .oficina__plano { display: block; width: 100%; height: auto; font-family: var(--kp-fuente-base); }
+  .base-estelar-demo .oficina__plano text { font-size: 11px; fill: var(--kp-color-texto-suave); user-select: none; }
+  .base-estelar-demo .sala--frontend { --sala: var(--kp-sala-frontend); --suelo: var(--kp-sala-frontend-suelo); --borde-sala: var(--kp-sala-frontend-borde); }
+  .base-estelar-demo .sala--revision { --sala: var(--kp-sala-revision); --suelo: var(--kp-sala-revision-suelo); --borde-sala: var(--kp-sala-revision-borde); }
+  .base-estelar-demo .sala--docs { --sala: var(--kp-sala-docs); --suelo: var(--kp-sala-docs-suelo); --borde-sala: var(--kp-sala-docs-borde); }
+  .base-estelar-demo .sala--otros { --sala: var(--kp-sala-otros); --suelo: var(--kp-sala-otros-suelo); --borde-sala: var(--kp-sala-otros-borde); }
+  .base-estelar-demo .sala--orquestador { --sala: var(--kp-sala-orquestador); --suelo: var(--kp-sala-orquestador-suelo); --borde-sala: var(--kp-sala-orquestador-borde); }
+  .base-estelar-demo .sala__fondo { fill: var(--suelo); stroke: var(--borde-sala); stroke-width: 1; transition: fill .8s ease-in-out, stroke .8s ease-in-out; }
+  .base-estelar-demo .comun__fondo { fill: var(--kp-color-superficie-hundida); stroke: var(--kp-color-borde); stroke-width: 1; }
+  .base-estelar-demo .sala__franja { fill: var(--sala); }
+  .base-estelar-demo .oficina__plano .sala__nombre { fill: var(--kp-color-texto); font-weight: 500; }
+  .base-estelar-demo .oficina__plano .sala__nombre--tenue { fill: var(--kp-color-texto-suave); font-weight: 400; }
+  .base-estelar-demo .mesa__tablero { fill: var(--kp-obj-mesa); } .base-estelar-demo .mesa__pantalla { fill: var(--kp-obj-pantalla); }
+  .base-estelar-demo .oficina__plano .objeto__etiqueta { fill: var(--kp-color-texto-suave); }
+  .base-estelar-demo .cafe__cuerpo { fill: var(--kp-obj-cafetera); } .base-estelar-demo .cafe__pantalla { fill: var(--kp-obj-pantalla); } .base-estelar-demo .cafe__hueco { fill: var(--kp-color-superficie-hundida); }
+  .base-estelar-demo .pizarra__marco { fill: var(--kp-color-superficie-elevada); stroke: var(--kp-color-borde-fuerte); stroke-width: 1; }
+  .base-estelar-demo .pizarra__linea { stroke: var(--kp-color-borde); stroke-width: 1; }
+  .base-estelar-demo .oficina__plano .pizarra__columna,
+.base-estelar-demo .oficina__plano .mueble__titulo { fill: var(--kp-color-texto); font-weight: 500; }
+  .base-estelar-demo .postit { --relleno: var(--kp-postit-pendiente); transition: transform .7s ease-in-out; }
+  .base-estelar-demo .postit--en-curso { --relleno: var(--kp-postit-en-curso); } .base-estelar-demo .postit--hecha { --relleno: var(--kp-postit-hecho); }
+  .base-estelar-demo .postit rect { fill: var(--relleno); transition: fill .4s ease-in-out; }
+  .base-estelar-demo .oficina__plano .postit text { font-size: 9.5px; fill: var(--kp-postit-texto); }
+  .base-estelar-demo .bandeja__base { fill: var(--kp-obj-mesa); }
+  .base-estelar-demo .oficina__plano .bandeja__cuenta { fill: var(--kp-color-borrador); font-weight: 500; }
+  .base-estelar-demo .cola-dudas__duda circle { fill: var(--kp-actividad-esperando); }
+  .base-estelar-demo .oficina__plano .cola-dudas__duda text { fill: var(--kp-color-texto); }
+  .base-estelar-demo .semaforo__luz { fill: var(--kp-actividad-libre); transition: fill .4s; } .base-estelar-demo .semaforo__luz--correcto { fill: var(--kp-actividad-trabajando); }
+  .base-estelar-demo .sala--fase-curso .sala__fondo { stroke: var(--kp-fase-curso); stroke-width: 2.5; animation: kp-latido-fase 1.6s ease-in-out infinite; }
+  .base-estelar-demo .sala--fase-hecho .sala__fondo { stroke: var(--kp-color-hecho); stroke-width: 2.5; }
+  .base-estelar-demo .oficina__plano .sala__fase { fill: var(--kp-fase-curso); font-size: 12px; font-weight: 500; }
+  .base-estelar-demo .oficina__plano .sala--fase-hecho .sala__fase { fill: var(--kp-color-hecho); }
+  @keyframes kp-latido-fase { 50% { stroke-opacity: .3; } }
+
+  .base-estelar-demo .muneco__cuerpo,
+.base-estelar-demo .muneco__brazo { fill: var(--sala); }
+  .base-estelar-demo .muneco__brazo { filter: brightness(.85); transform-box: fill-box; transform-origin: 50% 0; }
+  .base-estelar-demo .muneco__pierna { fill: var(--kp-muneco-pierna); transform-box: fill-box; }
+  .base-estelar-demo .muneco__cara { fill: var(--kp-muneco-piel); } .base-estelar-demo .muneco__pelo { fill: var(--kp-muneco-pelo); } .base-estelar-demo .muneco__ojo { fill: var(--kp-muneco-ojo); }
+  .base-estelar-demo .muneco__mejilla { fill: var(--kp-muneco-mejilla); opacity: .55; }
+  .base-estelar-demo .muneco__boca { fill: none; stroke: var(--kp-muneco-ojo); stroke-width: 1; stroke-linecap: round; }
+  .base-estelar-demo .muneco__punto { fill: var(--kp-actividad-libre); stroke: var(--kp-color-superficie); stroke-width: 1.5; }
+  .base-estelar-demo .muneco__taza-cuerpo { fill: var(--kp-obj-taza); stroke: var(--kp-obj-taza-borde); stroke-width: 1; }
+  .base-estelar-demo .muneco__asa,
+.base-estelar-demo .muneco__vapor { fill: none; stroke-linecap: round; }
+  .base-estelar-demo .muneco__asa { stroke: var(--kp-obj-taza-borde); stroke-width: 1.4; }
+  .base-estelar-demo .muneco__vapor { stroke: var(--kp-obj-vapor); stroke-width: 1; opacity: .7; animation: kp-vapor 1.8s ease-out infinite; }
+  .base-estelar-demo .muneco__vapor--b { animation-delay: .9s; }
+  @keyframes kp-vapor { from { transform: translateY(1px); opacity: .7; } to { transform: translateY(-3px); opacity: 0; } }
+  .base-estelar-demo .muneco__taza { display: none; } .base-estelar-demo .muneco--libre .muneco__taza { display: inline; }
+  .base-estelar-demo .muneco--trabajando .muneco__punto { fill: var(--kp-actividad-trabajando); }
+  .base-estelar-demo .muneco--esperando .muneco__punto { fill: var(--kp-actividad-esperando); }
+  .base-estelar-demo .oficina__plano .muneco__nombre { fill: var(--kp-color-texto); font-size: 10px; }
+  .base-estelar-demo .muneco__bocadillo { display: none; } .base-estelar-demo .muneco__bocadillo.visible { display: inline; }
+  .base-estelar-demo .muneco__bocadillo rect,
+.base-estelar-demo .muneco__bocadillo path { fill: var(--kp-color-superficie-elevada); stroke: var(--kp-color-borde-fuerte); }
+  .base-estelar-demo .muneco__bocadillo path { stroke: none; }
+  .base-estelar-demo .oficina__plano .muneco__bocadillo text { fill: var(--kp-color-texto); font-size: 10px; }
+  .base-estelar-demo .muneco__bocadillo--llamada rect { stroke: var(--kp-guardian-oro); }
+  .base-estelar-demo .muneco--andando .muneco__pierna--a { animation: kp-paso .3s ease-in-out infinite alternate; }
+  .base-estelar-demo .muneco--andando .muneco__pierna--b { animation: kp-paso .3s ease-in-out infinite alternate-reverse; }
+  .base-estelar-demo .muneco--andando .muneco__brazo--a { animation: kp-braceo .3s ease-in-out infinite alternate-reverse; }
+  .base-estelar-demo .muneco--andando .muneco__brazo--b { animation: kp-braceo .3s ease-in-out infinite alternate; }
+  .base-estelar-demo .muneco--trabajando:not(.muneco--andando) .muneco__cabeza { animation: kp-teclear .7s ease-in-out infinite alternate; }
+  .base-estelar-demo .muneco--llamando .muneco__brazo--b { animation: kp-llamada .4s ease-in-out infinite alternate; }
+  .base-estelar-demo .muneco__llamada { display: none; } .base-estelar-demo .muneco--llamando .muneco__llamada { display: inline; }
+  .base-estelar-demo .muneco__llamada path { fill: none; stroke: var(--sala); stroke-width: 2; stroke-linecap: round; animation: kp-eco .8s ease-out infinite; }
+  .base-estelar-demo .muneco__llamada path + path { animation-delay: .2s; }
+  .base-estelar-demo .haz-llamada { fill: none; stroke: var(--kp-guardian-oro); stroke-width: 2; stroke-linecap: round; stroke-dasharray: 6 5; opacity: .85; animation: kp-haz .6s linear infinite; }
+  @keyframes kp-haz { to { stroke-dashoffset: -11; } }
+  @keyframes kp-llamada { from { transform: rotate(-145deg); } to { transform: rotate(-175deg); } }
+  @keyframes kp-eco { from { opacity: 1; } to { opacity: 0; } }
+  @keyframes kp-paso { from { transform: translateY(-2px); } to { transform: translateY(2px); } }
+  @keyframes kp-braceo { from { transform: rotate(-22deg); } to { transform: rotate(22deg); } }
+  @keyframes kp-teclear { from { transform: translateY(0); } to { transform: translateY(1.2px); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .base-estelar-demo *, .base-estelar-demo *::before, .base-estelar-demo *::after { animation: none !important; transition: none !important; }
+  }
+
+.base-estelar-demo .controles { align-self: flex-end; display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 8px; }
+.base-estelar-demo .controles .conmutador { align-self: auto; }
+.base-estelar-demo .pausa-btn { border: 1px solid var(--kp-color-borde-fuerte); border-radius: 8px; background: var(--kp-color-superficie); }
+.base-estelar-demo .pausa-btn[aria-pressed="true"] { background: var(--kp-terminal-pestana-activa-fondo); color: #fff; }
+.base-estelar-demo .vista-marco { position: relative; }

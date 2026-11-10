@@ -4,57 +4,26 @@ Log de fallos encontrados al **probar** el sitio. Registrar en el momento; no de
 memoria. Los dos primeros están anotados desde el arranque porque ya se sabe que existen: son el
 resultado de la limpieza a medias y se resuelven en la Fase 1.
 
-**Estado:** ✅ ARREGLADA · 🔧 EN CURSO · ⏳ PENDIENTE.
+**Estado:** ✅ ARREGLADA · 🔧 EN CURSO · ⏳ PENDIENTE. Las ✅ se mueven a `fixes-archivo.md` al cerrar
+cada fase o módulo.
 
-## FIX-001 — El build falla: import de Firebase que ya no existe
+## FIX-007 — Rendimiento móvil Lighthouse bajo en esta máquina (TBT 580-1350 ms), no atribuible a la demo
 
-- **Estado:** ✅ ARREGLADA (Fase 1)
-- **Dónde:** `src/app/layout.tsx`, línea 4.
-- **Problema:** el layout importaba `FirebaseClientProvider` desde `@/firebase/client-provider`, pero
-  la carpeta `src/firebase/` se borró en la limpieza. La aplicación no compilaba. `ignoreBuildErrors`
-  no lo enmascaraba porque es un fallo de resolución de módulo, no de tipos.
-- **Causa:** el desacople de Firebase borró los ficheros pero no retiró sus usos.
-- **Solución:** retirado el import y el envoltorio `<FirebaseClientProvider>`, dejando `{children}` y
-  `<Toaster />` directamente en el `<body>`. Retirada también la dependencia `firebase` de
-  `package.json`.
-- **Verificación:** `npm run typecheck` en verde y `npm run build` completo. Comprobado que
-  `<Toaster />` sigue montado, del que depende el feedback del formulario de contacto.
+- **Estado:** ℹ️ INFORMATIVO (no es fallo de la tarea)
+- **Medición 2026-11-08 (build de producción, móvil, 3 pasadas cada una):** con demo Rend. 67/77/81, A11y
+  100, BP 100, SEO 100, LCP 3.3/1.1/1.1 s, CLS 0.001/0.001/0 . Línea base en la misma máquina sustituyendo la
+  demo por las dos capturas antiguas (copia temporal fuera del repo): Rend. 72/78/85, LCP 3.3/1.0/0.9 s,
+  CLS 0.001. Diferencia ~4-5 puntos, dentro del ruido; la mediana de hoy es inferior a la histórica (90-98) también
+  sin la demo. La primera pasada de cada serie sale peor (LCP 3,3 s, arranque en frío).
 
-## FIX-002 — Enlaces muertos en la sección Projects
+## FIX-011 — Lighthouse móvil muy variable en esta máquina; el coste del telón no se puede aislar con certeza
 
-- **Estado:** ⏳ PENDIENTE
-- **Dónde:** `src/app/page.tsx`, constante `projects`.
-- **Problema:** las dos tarjetas enlazan a `/web1` y `/web2`, demos estáticas que se borraron de
-  `public/`. El botón "Ver Proyecto en Vivo" lleva a un 404.
-- **Causa:** misma limpieza sin commitear.
-- **Solución:** pendiente. **Bloqueada por decisión de Jesús:** se retiran las tarjetas, pero qué
-  queda en la sección es una pregunta abierta que no decide un agente.
-- **Verificación:** pendiente.
-
-## FIX-003 — `label.tsx` borrado por error rompía el formulario de contacto
-
-- **Estado:** ✅ ARREGLADA (Fase 1)
-- **Dónde:** `src/components/ui/label.tsx` (ausente), usado por `src/components/ui/form.tsx:16`.
-- **Problema:** la limpieza de primitivas shadcn no usadas se llevó también `label.tsx`, que **sí se
-  usa**: `form.tsx` lo importa para `FormLabel`, y de ahí depende todo el formulario de contacto.
-  `tsc` lo delataba con `TS2307: Cannot find module '@/components/ui/label'`.
-- **Causa:** al inventariar las primitivas no usadas se miró qué importaba `page.tsx`, pero no las
-  dependencias entre primitivas: `label` no lo usa ninguna página directamente, sino `form`.
-- **Solución:** restaurado desde HEAD con `git checkout HEAD -- src/components/ui/label.tsx`. Su
-  dependencia `@radix-ui/react-label` seguía en `package.json`, lo que confirma que el borrado fue un
-  descuido y no una decisión.
-- **Verificación:** `npm run typecheck` en verde tras restaurarlo.
-
-## FIX-004 — `npm run build` no funcionaba en Windows
-
-- **Estado:** ✅ ARREGLADA (Fase 1)
-- **Dónde:** `package.json`, script `build`.
-- **Problema:** el script era `NODE_ENV=production next build`. Esa forma de fijar variables de
-  entorno es de shell Unix; npm lanza los scripts por `cmd` en Windows, que responde `"NODE_ENV" no
-  se reconoce como un comando interno o externo`. En Vercel (Linux) funcionaba, así que el fallo solo
-  se veía en local.
-- **Causa:** script heredado de la plantilla original, pensado para un entorno Unix.
-- **Solución:** simplificado a `next build`. El prefijo era redundante: `next build` ya fuerza
-  `NODE_ENV=production` por sí mismo, así que quitarlo no cambia el resultado y arregla el script en
-  los dos sistemas.
-- **Verificación:** `npm run build` completo en Windows.
+- **Estado:** ℹ️ INFORMATIVO (no es fallo de la tarea)
+- **Medición 2026-11-09 (build de producción, móvil; `benchmarkIndex` de Lighthouse entre ≈1000 y ≈2400 según la
+  tanda):** a CPU ≈1000 (la mitad), 4 pares intercalados primera visita / visita repetida: oscuro 80-86 (LCP 1,2 s,
+  CLS 0, TBT 540-830 ms) frente a 84-92 repetida (LCP 0,7-1,0 s, CLS 0,001, TBT 350-650 ms); claro 81-89 frente a
+  84-93. La primera visita (con telón) cuesta ≈3-6 puntos y ≈0,2-0,5 s de LCP frente a la repetida (sin telón);
+  A11y/BP/SEO siempre 100. A ≈2100-2400: oscuro primera visita 99 (LCP 1,1 s, CLS 0,003) en una tanda, pero 90-92 con
+  LCP 3,1-3,2 s (el `<p>` del hero) en otra, también en visita repetida (arranque en frío, como FIX-007). Escritorio:
+  100 siempre, LCP 0,2-0,3 s, CLS 0,001-0,004. El elemento LCP es el `<h1>` del hero (a veces el `<p>` o el `<pre>`
+  del hero), nunca el telón. No comparable con las cifras de la Fase 7 sin repetir con la máquina en reposo.

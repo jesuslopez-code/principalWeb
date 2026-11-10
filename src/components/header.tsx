@@ -1,71 +1,84 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
-import { Code } from "lucide-react";
+import { Menu } from "lucide-react";
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
+  SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet"
-import { Button } from "./ui/button";
-import { Menu } from "lucide-react";
-import { useState } from "react";
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import { ThemeToggle } from "@/components/theme-toggle";
 
+// Las anclas llevan "/" delante para que también funcionen desde otras rutas (404, futuras).
+const navLinks = [
+  { href: "/#about", label: "01. sobre mí" },
+  { href: "/#projects", label: "02. proyectos" },
+  { href: "/#skills", label: "03. habilidades" },
+  { href: "/#contact", label: "04. contacto" },
+];
 
 export function Header() {
   const [isOpen, setIsOpen] = useState(false);
 
-  const navLinks = [
-      { href: "#about", label: "Sobre Mí" },
-      { href: "#projects", label: "Proyectos" },
-      { href: "#skills", label: "Habilidades" },
-      { href: "#contact", label: "Contacto" },
-  ];
-
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 max-w-screen-2xl items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2">
-          <Code className="h-6 w-6 text-primary" />
-          <span className="font-bold sm:inline-block">Jesús López</span>
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-blur">
+      <div className="container mx-auto flex h-14 items-center justify-between px-4 md:px-6">
+        <Link
+          href="/"
+          className="font-mono text-sm text-foreground transition-colors hover:text-primary rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        >
+          <span aria-hidden="true" className="text-primary">&gt;_</span> <span aria-hidden="true">jesús</span>
+          <span className="sr-only">Jesús López, inicio</span>
         </Link>
-        
-        <nav className="hidden items-center gap-6 text-sm md:flex">
+
+        <nav aria-label="Principal" className="hidden items-center gap-6 font-mono text-sm md:flex">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="transition-colors hover:text-foreground/80 text-foreground/60"
+              className="text-muted-foreground transition-colors hover:text-primary rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {link.label}
             </Link>
           ))}
         </nav>
 
+        <div className="hidden md:block">
+          <ThemeToggle />
+        </div>
+
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
             <Button variant="outline" size="icon" className="md:hidden">
               <Menu className="h-5 w-5" />
-              <span className="sr-only">Toggle navigation menu</span>
+              <span className="sr-only">Abrir menú de navegación</span>
             </Button>
           </SheetTrigger>
           <SheetContent side="left">
-            <nav className="grid gap-6 text-lg font-medium mt-10">
-              <Link href="/" className="flex items-center gap-2 text-lg font-semibold" onClick={() => setIsOpen(false)}>
-                <Code className="h-6 w-6 text-primary" />
-                <span className="sr-only">Jesús López</span>
-              </Link>
+            <SheetTitle className="font-mono text-sm font-normal">
+              <span aria-hidden="true" className="text-primary">&gt;_</span> <span aria-hidden="true">jesús</span>
+              <span className="sr-only">Jesús López, inicio</span>
+            </SheetTitle>
+            <SheetDescription className="sr-only">Navegación principal</SheetDescription>
+            <nav aria-label="Móvil" className="mt-8 grid gap-6 font-mono text-base">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="hover:text-foreground text-muted-foreground"
+                  className="text-muted-foreground transition-colors hover:text-primary rounded-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
             </nav>
+            <div className="mt-8">
+              <ThemeToggle showLabels />
+            </div>
           </SheetContent>
         </Sheet>
       </div>
